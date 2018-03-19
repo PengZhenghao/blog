@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="彭正皓的博客">
 <meta property="og:description" content="目标 目前已经完成了可以运行的代码。下一步要把代码重构，以使其支持如下功能：  可以在任何时候修改reward函数。支持稀疏的以及连续的reward。 可以选择decentralized或centralized的P网络，也就是所有agent（同个net内）共用一个或者各有一个。 其他修改（比如action）  关于Action的讨论现在的action是上下左右停，有没有别的方式去进行routing">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-03-19T09:40:34.000Z">
+<meta property="og:updated_time" content="2018-03-19T13:42:55.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="3D Routing算法的代码的设计方案">
 <meta name="twitter:description" content="目标 目前已经完成了可以运行的代码。下一步要把代码重构，以使其支持如下功能：  可以在任何时候修改reward函数。支持稀疏的以及连续的reward。 可以选择decentralized或centralized的P网络，也就是所有agent（同个net内）共用一个或者各有一个。 其他修改（比如action）  关于Action的讨论现在的action是上下左右停，有没有别的方式去进行routing">
@@ -185,7 +185,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            首页
+            首页 | Home
           </a>
         </li>
       
@@ -195,7 +195,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
-            分类
+            分类 | Categories
           </a>
         </li>
       
@@ -226,6 +226,16 @@
               <i class="menu-item-icon fa fa-fw fa-cube"></i> <br />
             
             日志 | Doc
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-address-card"></i> <br />
+            
+            关于 | About
           </a>
         </li>
       
@@ -370,19 +380,18 @@
 </ul>
 </li>
 <li>包含了所有层级的信息（先放一放）</li>
-<li><p>能够适用于2D和3D（先放一放）</p>
-<h2 id="对于P"><a href="#对于P" class="headerlink" title="对于P"></a>对于P</h2><p>  无论考不考虑中心化的P，传入P的ob一定要具有以下属性：</p>
+<li>能够适用于2D和3D（先放一放）</li>
+</ul>
+<h2 id="对于P"><a href="#对于P" class="headerlink" title="对于P"></a>对于P</h2><p>无论考不考虑中心化的P，传入P的ob一定要具有以下属性：</p>
 <ul>
 <li>有本agent的信息</li>
-<li><p>有其他agent的信息<br>所以其实考虑原来的方法：传入一个图像，用1表示已有的轨道，用2表示目前的位置，已经基本满足。但是考虑到加入了Undo操作，要加入上一步信息才行。</p>
-<h2 id="对于Q"><a href="#对于Q" class="headerlink" title="对于Q"></a>对于Q</h2></li>
+<li>有其他agent的信息</li>
 </ul>
-</li>
-</ul>
-<h1 id="P网络的中心化与非中心化"><a href="#P网络的中心化与非中心化" class="headerlink" title="P网络的中心化与非中心化"></a>P网络的中心化与非中心化</h1><p>这个章节我们要讨论P网络的设计以及对应Env的代码写法。<br>在我们的问题中，Q网络毫无疑问应该是中心化的。最需要讨论的是P网络中心化与否。鉴于中心化的P是最容易实现的，先讨论这种情况，并引申出代码的实现细节。</p>
+<p>所以其实考虑原来的方法：传入一个图像，用1表示已有的轨道，用2表示目前的位置，已经基本满足。但是考虑到加入了Undo操作，要加入上一步信息才行。</p>
+<h2 id="对于Q"><a href="#对于Q" class="headerlink" title="对于Q"></a>对于Q</h2><h1 id="P网络的中心化与非中心化"><a href="#P网络的中心化与非中心化" class="headerlink" title="P网络的中心化与非中心化"></a>P网络的中心化与非中心化</h1><p>这个章节我们要讨论P网络的设计以及对应Env的代码写法。<br>在我们的问题中，Q网络毫无疑问应该是中心化的。最需要讨论的是P网络中心化与否。鉴于中心化的P是最容易实现的，先讨论这种情况，并引申出代码的实现细节。</p>
 <p>##中心化的P网络</p>
 <p>###action（Env的输入，P网络的输出）<br>输入的action是一个N长list：<code>action_n</code>，每个元素是一个数字（或者one-hot），数字是[0, 5]之间的（考虑Undo操作）整数。</p>
-<p><em>如何在可变agents数目的情况下应对P网络的输出呢？</em></p>
+<p>*如何在可变agents数目的情况下应对P网络的输出呢？直接输出6个值就好了</p>
 <p>##非中心化的P网络<br>先不予讨论。</p>
 <hr>
 <hr>
@@ -579,7 +588,7 @@
                 alt="彭正皓" />
             
               <p class="site-author-name" itemprop="name">彭正皓</p>
-              <p class="site-description motion-element" itemprop="description">这是彭正皓的个人主页。随笔栏目将会分享彭正皓用中文撰写的一些文章。技术栏目将会用英文分享许多编程中遇到的Bug和解决方案。而日志栏目将会是用中文写就的一些事务性的档案。This is the personal page of PENG Zhenghao. In Essay, I will share some essay written in Chinese. In Tech, I will share the solution of encountered bugs in coding, which for generalization are written in English. In Doc there are some transactional logging.</p>
+              <p class="site-description motion-element" itemprop="description"></p>
           </div>
 
           <nav class="site-state motion-element">
