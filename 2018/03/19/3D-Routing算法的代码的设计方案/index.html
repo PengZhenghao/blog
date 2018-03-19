@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="彭正皓的博客">
 <meta property="og:description" content="目标 目前已经完成了可以运行的代码。下一步要把代码重构，以使其支持如下功能：  可以在任何时候修改reward函数。支持稀疏的以及连续的reward。 可以选择decentralized或centralized的P网络，也就是所有agent（同个net内）共用一个或者各有一个。 其他修改（比如action）  关于Action的讨论现在的action是上下左右停，有没有别的方式去进行routing">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-03-19T13:42:55.000Z">
+<meta property="og:updated_time" content="2018-03-19T13:51:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="3D Routing算法的代码的设计方案">
 <meta name="twitter:description" content="目标 目前已经完成了可以运行的代码。下一步要把代码重构，以使其支持如下功能：  可以在任何时候修改reward函数。支持稀疏的以及连续的reward。 可以选择decentralized或centralized的P网络，也就是所有agent（同个net内）共用一个或者各有一个。 其他修改（比如action）  关于Action的讨论现在的action是上下左右停，有没有别的方式去进行routing">
@@ -413,7 +413,7 @@
 <li>envs<ul>
 <li>__init__.py</li>
 <li>core.py</li>
-<li>environment.py</li>
+<li>environment.py（TODO：恢复原来的N list输出！）</li>
 <li>routing2D.py</li>
 <li>scenario.py</li>
 </ul>
@@ -430,7 +430,7 @@
 </ul>
 </li>
 <li>trainer<ul>
-<li>maddpg.py # 尽量别动</li>
+<li>maddpg.py # 尽量别动（TODO：恢复一个同时支持decen和cen的状态，接口不要变动）</li>
 <li>replay_buffer.py # 别动（完毕）</li>
 </ul>
 </li>
@@ -441,6 +441,9 @@
 </ul>
 <h1 id="reward函数"><a href="#reward函数" class="headerlink" title="reward函数"></a>reward函数</h1><p>reward来自Env，Env来自MultiAgentEnv中的reward_callback函数，在每个step中，MultiAgentEnv会这样调用这个函数：<code>reward_callback(agent)</code>，这个callback函数要在创建MultiAgentEnv的时候传入，它的输入的是一个agent对象。这显然是不合理的，agent对象中保存了自己的位置，但是没有保存ind和观察到的东西或者是其他跟环境有关的东西。</p>
 <p>为了顾及中心化和非中心化P网络，以及随时修改reward函数的功能，我们建议把reward_callback在创建Env的时候传入，这个函数应该在train.py完成。这样的话，可以在实验过程中传入不同的reward函数。而且，此函数的输入不应该只有一个agent，应该包含：包含了所有信息的Map，最好的办法是与Env的返回Obs完全一致。也就是说，此函数的输入应该包含了全局信息和agent自己的信息（比如Ind或Loc）。</p>
+<ul>
+<li>TODO：重新设计Reward函数</li>
+</ul>
 <h1 id="Observation"><a href="#Observation" class="headerlink" title="Observation"></a>Observation</h1><ul>
 <li>TODO：修改了OB之后，外围程序都要相应修改。从第一个得到OB的地方开始！</li>
 </ul>
@@ -454,7 +457,7 @@
 <p>可以看出这个矩阵的设计，只针对于2D问题。</p>
 <h1 id="新增：agent增加属性self-index"><a href="#新增：agent增加属性self-index" class="headerlink" title="新增：agent增加属性self.index"></a>新增：agent增加属性self.index</h1><p>agent的构造位置为<code>routing2D.py</code>中，这个scenario的`reset_world。</p>
 <ul>
-<li>TODO：修改所有的<code>enumerate</code></li>
+<li><del>TODO：修改所有的<code>enumerate</code></del></li>
 </ul>
 
       
