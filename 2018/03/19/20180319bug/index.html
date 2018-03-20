@@ -83,17 +83,17 @@
 
 
 
-<meta name="description" content="Error Infomation12345678/Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages/tensorflow/core/framework/resource_handle_pb2.py in &amp;lt;module&amp;gt;()     39       message_type=Non">
+<meta name="description" content="Error Infomation 12345678/Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages/tensorflow/core/framework/resource_handle_pb2.py in &amp;lt;module&amp;gt;()     39       message_type=No">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Tensorflow导入出错 | Error occured when import tensorflow:&amp;ensp;TypeError:&amp;ensp;__init__() got an unexpected keyword argument &#39;file&#39;">
 <meta property="og:url" content="http://PengZhenghao.github.io/2018/03/19/20180319bug/index.html">
 <meta property="og:site_name" content="彭正皓的博客">
-<meta property="og:description" content="Error Infomation12345678/Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages/tensorflow/core/framework/resource_handle_pb2.py in &amp;lt;module&amp;gt;()     39       message_type=Non">
+<meta property="og:description" content="Error Infomation 12345678/Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages/tensorflow/core/framework/resource_handle_pb2.py in &amp;lt;module&amp;gt;()     39       message_type=No">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2018-03-19T13:47:16.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Tensorflow导入出错 | Error occured when import tensorflow:&amp;ensp;TypeError:&amp;ensp;__init__() got an unexpected keyword argument &#39;file&#39;">
-<meta name="twitter:description" content="Error Infomation12345678/Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages/tensorflow/core/framework/resource_handle_pb2.py in &amp;lt;module&amp;gt;()     39       message_type=Non">
+<meta name="twitter:description" content="Error Infomation 12345678/Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages/tensorflow/core/framework/resource_handle_pb2.py in &amp;lt;module&amp;gt;()     39       message_type=No">
 
 
 
@@ -370,16 +370,20 @@
       
 
       
-        <h1 id="Error-Infomation"><a href="#Error-Infomation" class="headerlink" title="Error Infomation"></a>Error Infomation</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">/Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages/tensorflow/core/framework/resource_handle_pb2.py in &lt;module&gt;()</span><br><span class="line">     39       message_type=None, enum_type=None, containing_type=None,</span><br><span class="line">     40       is_extension=False, extension_scope=None,</span><br><span class="line">---&gt; 41       options=None, file=DESCRIPTOR),</span><br><span class="line">     42     _descriptor.FieldDescriptor(</span><br><span class="line">     43       name=&apos;container&apos;, full_name=&apos;tensorflow.ResourceHandleProto.container&apos;, index=1,</span><br><span class="line"></span><br><span class="line">TypeError: __init__() got an unexpected keyword argument &apos;file&apos;</span><br></pre></td></tr></table></figure>
-<h1 id="Environment"><a href="#Environment" class="headerlink" title="Environment"></a>Environment</h1><ul>
+        <h1 id="error-infomation">Error Infomation</h1>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">/Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages/tensorflow/core/framework/resource_handle_pb2.py in &lt;module&gt;()</span><br><span class="line">     39       message_type=None, enum_type=None, containing_type=None,</span><br><span class="line">     40       is_extension=False, extension_scope=None,</span><br><span class="line">---&gt; 41       options=None, file=DESCRIPTOR),</span><br><span class="line">     42     _descriptor.FieldDescriptor(</span><br><span class="line">     43       name=&apos;container&apos;, full_name=&apos;tensorflow.ResourceHandleProto.container&apos;, index=1,</span><br><span class="line"></span><br><span class="line">TypeError: __init__() got an unexpected keyword argument &apos;file&apos;</span><br></pre></td></tr></table></figure>
+<h1 id="environment">Environment</h1>
+<ul>
 <li>Tensorflow 1.6</li>
 <li>Protobuf(installed by pip) 3.5.2.post1</li>
 <li>Protobuf(installed by brew) 3.3.0</li>
 </ul>
-<h1 id="Reason"><a href="#Reason" class="headerlink" title="Reason"></a>Reason</h1><p>The <code>protobuf</code> package version mismatch with tensorflow.</p>
-<p>And I, don’t know when, installed protobuf 3.3.0 by <strong>brew</strong>.</p>
-<p>The latest <code>protobuf(3.5.2.post1)</code> install by pip doesn’t disturbing tensorflow.</p>
-<h1 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew uninstall protobuf</span><br></pre></td></tr></table></figure>
+<h1 id="reason">Reason</h1>
+<p>The <code>protobuf</code> package version mismatch with tensorflow.</p>
+<p>And I, don't know when, installed protobuf 3.3.0 by <strong>brew</strong>.</p>
+<p>The latest <code>protobuf(3.5.2.post1)</code> install by pip doesn't disturbing tensorflow.</p>
+<h1 id="solution">Solution</h1>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew uninstall protobuf</span><br></pre></td></tr></table></figure>
 <p>Run this in terminal to uninstall the hidden <code>protobuf</code> and everything get well.</p>
 
       
@@ -444,7 +448,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/03/20/3D-Routing算法的最终设计/" rel="prev" title="3D Routing算法的设计">
+              <a href="/2018/03/20/20180320doc/" rel="prev" title="3D Routing算法的设计">
                 3D Routing算法的设计 <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -527,7 +531,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -601,7 +605,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Error-Infomation"><span class="nav-number">1.</span> <span class="nav-text">Error Infomation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Environment"><span class="nav-number">2.</span> <span class="nav-text">Environment</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reason"><span class="nav-number">3.</span> <span class="nav-text">Reason</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Solution"><span class="nav-number">4.</span> <span class="nav-text">Solution</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#error-infomation"><span class="nav-number">1.</span> <span class="nav-text">Error Infomation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#environment"><span class="nav-number">2.</span> <span class="nav-text">Environment</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#reason"><span class="nav-number">3.</span> <span class="nav-text">Reason</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#solution"><span class="nav-number">4.</span> <span class="nav-text">Solution</span></a></li></ol></div>
             
 
           </div>
