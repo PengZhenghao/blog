@@ -90,7 +90,7 @@
 <meta property="og:site_name" content="彭正皓的博客">
 <meta property="og:description" content="前言环境将物理位置离散为一个[x, y, nlayers]的三维空间，每个坐标点代表一个位置。 layer共有五层，第一层是pin层，只能选择向上运动。第二、四层只能允许垂直及水平方向的运动（x轴与z轴）。第三层允许垂直及前后方向的运动（x轴与z轴）。第五层只允许向下及前后方向的运动。 Notation定义 智能体（agent）$a_i$：一个可以在三维空间运动的对象。其初始位置为一个pin的位置">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-03-26T15:47:56.000Z">
+<meta property="og:updated_time" content="2018-04-17T08:19:07.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="3D Routing算法的设计">
 <meta name="twitter:description" content="前言环境将物理位置离散为一个[x, y, nlayers]的三维空间，每个坐标点代表一个位置。 layer共有五层，第一层是pin层，只能选择向上运动。第二、四层只能允许垂直及水平方向的运动（x轴与z轴）。第三层允许垂直及前后方向的运动（x轴与z轴）。第五层只允许向下及前后方向的运动。 Notation定义 智能体（agent）$a_i$：一个可以在三维空间运动的对象。其初始位置为一个pin的位置">
@@ -387,7 +387,12 @@
 <h1 id="P网络"><a href="#P网络" class="headerlink" title="P网络"></a>P网络</h1><ul>
 <li>decentalized</li>
 <li>一个agent一个P网络</li>
-<li>输入：ob</li>
+<li><p>输入：ob</p>
+</li>
+<li><p>centralized</p>
+</li>
+<li>只要重名即可</li>
+<li>同一个net用同一种P。</li>
 </ul>
 <h1 id="Q网络"><a href="#Q网络" class="headerlink" title="Q网络"></a>Q网络</h1><ul>
 <li>centralized</li>
@@ -437,7 +442,7 @@
 <p>在decentralized的P网络中，一个trainer对应一个网络、一个buffer，所有不能存在可变Agents数目的现象。这是因为训练Q网络的时候，需要把所有的<code>(state, action) pair</code>传入。（等会再讨论我们目前的Q网络）如果可变数目的话，那么在生成的pin比较少的场景之中，有的Trainer（P网络，Q网络，buffer）会缺失这个场景中的训练内容。但是在这个场景的训练Q的过程之中，却要输入（在原代码的实现中）所有agent的<code>(state, action)</code>，而这个trainer并没有对应的这个pair啊，所以会报错。同样的，在训练这个agent的P网络的时候，输入state，label为action，也会因为在这个trainer之中不存在这类数据而报错。</p>
 <p>下面分类讨论。</p>
 <p>先讨论agents数目不可变的情况对于目前设计的改造。有没有办法实现同一套网络，适配不同的agents输入呢？在执行阶段，agents数目变化，对应的仅仅是P网络的<strong>执行次数</strong>变化。不会有任何影响。在训练阶段，每个trainer会提取所有agents的buffer，然后训练自己的P、Q网络。</p>
-<p>一个Trainer，一个Q、一个P、一个Buffer，多次执行。大改代码！</p>
+<p>如果只要bench</p>
 <h1 id="传递给Q网络的GOB设计"><a href="#传递给Q网络的GOB设计" class="headerlink" title="传递给Q网络的GOB设计"></a>传递给Q网络的GOB设计</h1><p>目的是把ob,act传递进Q，让它揣测这个ob-&gt;ob`的过程的reward。<br>可以有几种设计方法。<br>第一种，把ob和new_pos 写在一起。new_pos设为class_ind+0.2。</p>
 
       
