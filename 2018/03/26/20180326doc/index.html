@@ -90,7 +90,7 @@
 <meta property="og:site_name" content="彭正皓的博客">
 <meta property="og:description" content="前言环境将物理位置离散为一个[x, y, nlayers]的三维空间，每个坐标点代表一个位置。 layer共有五层，第一层是pin层，只能选择向上运动。第二、四层只能允许垂直及水平方向的运动（x轴与z轴）。第三层允许垂直及前后方向的运动（x轴与z轴）。第五层只允许向下及前后方向的运动。 Notation定义 智能体（agent）$a_i$：一个可以在三维空间运动的对象。其初始位置为一个pin的位置">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-17T08:19:07.000Z">
+<meta property="og:updated_time" content="2018-05-03T11:46:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="3D Routing算法的设计">
 <meta name="twitter:description" content="前言环境将物理位置离散为一个[x, y, nlayers]的三维空间，每个坐标点代表一个位置。 layer共有五层，第一层是pin层，只能选择向上运动。第二、四层只能允许垂直及水平方向的运动（x轴与z轴）。第三层允许垂直及前后方向的运动（x轴与z轴）。第五层只允许向下及前后方向的运动。 Notation定义 智能体（agent）$a_i$：一个可以在三维空间运动的对象。其初始位置为一个pin的位置">
@@ -443,7 +443,7 @@
 <p>下面分类讨论。</p>
 <p>先讨论agents数目不可变的情况对于目前设计的改造。有没有办法实现同一套网络，适配不同的agents输入呢？在执行阶段，agents数目变化，对应的仅仅是P网络的<strong>执行次数</strong>变化。不会有任何影响。在训练阶段，每个trainer会提取所有agents的buffer，然后训练自己的P、Q网络。</p>
 <p>如果只要bench</p>
-<h1 id="传递给Q网络的GOB设计"><a href="#传递给Q网络的GOB设计" class="headerlink" title="传递给Q网络的GOB设计"></a>传递给Q网络的GOB设计</h1><p>目的是把ob,act传递进Q，让它揣测这个ob-&gt;ob`的过程的reward。<br>可以有几种设计方法。<br>第一种，把ob和new_pos 写在一起。new_pos设为class_ind+0.2。</p>
+<h1 id="传递给Q网络的GOB设计"><a href="#传递给Q网络的GOB设计" class="headerlink" title="传递给Q网络的GOB设计"></a>传递给Q网络的GOB设计</h1><p>目的是把ob,act传递进Q，让它揣测这个ob-&gt;ob`的过程的reward。<br>可以有几种设计方法。<br>第一种，把ob和new_pos 写在一起。new_pos设为class_ind+0.2。<br>而倒数第二个位置写成[1.1]</p>
 
       
     </div>
@@ -590,7 +590,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
