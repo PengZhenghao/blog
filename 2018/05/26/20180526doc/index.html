@@ -90,7 +90,7 @@
 <meta property="og:site_name" content="彭正皓的博客">
 <meta property="og:description" content="动作检测（Action Detection）文献综述-持续更新Multi-region Two-Stream R-CNN for Action Detection彭老师的一篇文章。构造了一个完整的时空监测与定位系统。代码极其纷繁复杂。但是思路非常清晰。简而言之就是用帧级网络提供动作分类和BBox，而后用经典的最大子数组算法得到动作的起止时间。 首先，提出了一个专门适配于视频的Faster R-CN">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-05-26T07:42:19.000Z">
+<meta property="og:updated_time" content="2018-05-26T08:23:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="动作检测（Action Detection）文献综述-持续更新">
 <meta name="twitter:description" content="动作检测（Action Detection）文献综述-持续更新Multi-region Two-Stream R-CNN for Action Detection彭老师的一篇文章。构造了一个完整的时空监测与定位系统。代码极其纷繁复杂。但是思路非常清晰。简而言之就是用帧级网络提供动作分类和BBox，而后用经典的最大子数组算法得到动作的起止时间。 首先，提出了一个专门适配于视频的Faster R-CN">
@@ -388,7 +388,8 @@
 <li>将帧级网络的输出直接取平均值真的OK？一个proposal一百多秒你就取了个平均值？</li>
 <li>监督的。</li>
 </ul>
-<h2 id="End-to-end-Sequence-Labeling-via-Bi-directional-LSTM-CNNs-CRF"><a href="#End-to-end-Sequence-Labeling-via-Bi-directional-LSTM-CNNs-CRF" class="headerlink" title="End-to-end Sequence Labeling via Bi-directional LSTM-CNNs-CRF"></a>End-to-end Sequence Labeling via Bi-directional LSTM-CNNs-CRF</h2><p>看到了CRF是个很合理的东西，想把它与NN结合，没想到早就在NLP领域有人用过了。我估计在视频领域也有人用过了，但是还没细找。现在先看看这篇。</p>
+<h2 id="End-to-end-Sequence-Labeling-via-Bi-directional-LSTM-CNNs-CRF"><a href="#End-to-end-Sequence-Labeling-via-Bi-directional-LSTM-CNNs-CRF" class="headerlink" title="End-to-end Sequence Labeling via Bi-directional LSTM-CNNs-CRF"></a>End-to-end Sequence Labeling via Bi-directional LSTM-CNNs-CRF</h2><p>看到了CRF是个很合理的东西，想把它与NN结合，没想到早就在NLP领域有人用过了。我估计在视频领域也有人用过了，但是还没细找。现在先看看这篇。我主要关心：如何把CRF做成NN中的一个层，并可以E2E的训练。</p>
+<p>思路：每个单词的的one-hot形式，可以被排列成一个2D图像。用CNN对这个图像做处理，得到一个Character-level Embedding（一个单词一个Ebd）。这个C-level Ebd和一个传统的Word Ebd向量Concat起来，传给biLstm。在这个任务中，在每给定一个word的输入时，这个word对应的两个biLSTM隐含状态被输入到CRF中。</p>
 <h2 id="The-Moving-Pose-An-Efficient-3D-Kinematics-Descriptor-for-Low-Latency-Action-Recognition-and-Detectio"><a href="#The-Moving-Pose-An-Efficient-3D-Kinematics-Descriptor-for-Low-Latency-Action-Recognition-and-Detectio" class="headerlink" title="The Moving Pose: An Efficient 3D Kinematics Descriptor for Low-Latency Action Recognition and Detectio"></a>The Moving Pose: An Efficient 3D Kinematics Descriptor for Low-Latency Action Recognition and Detectio</h2>
       
     </div>
@@ -478,6 +479,11 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNjgzOC8xMzM3NA=="></div>
+    </div>
 
   
 
@@ -797,6 +803,17 @@
 
 
 
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
   
 
 
