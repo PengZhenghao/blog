@@ -366,8 +366,15 @@
       
         
           
-          Multi-region Two-Stream R-CNN for Action Detection彭老师的一篇文章。构造了一个完整的时空监测与定位系统。代码极其纷繁复杂。但是思路非常清晰。简而言之就是用帧级网络提供动作分类和BBox，而后用经典的最大子数组算法得到动作的起止时间。
-首先，提出了一个
+          前言目前看到的许多文章，都可以认为是一个包含以下部分的框架：
+
+时段propose机制
+位置propose机制
+Frame Embedding
+Video Embedding
+分类机制
+
+时段提名机制有许多，可以分为两类：一、前置类。在监督学习中，有的是使用actioness作为判断依据，再根据一些
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1612,7 +1619,7 @@ Notati
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://PengZhenghao.github.io/2018/03/19/20180319bug2/">
+    <link itemprop="mainEntityOfPage" href="http://PengZhenghao.github.io/2018/03/19/20180319doc/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="彭正皓">
@@ -1631,7 +1638,7 @@ Notati
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/03/19/20180319bug2/" itemprop="url">标题中冒号后面的空格会引发Hexo错误 | Space after colon is not allowed appear in a post title of Hexo | YAMLException:&ensp;incomplete explicit mapping pair; a key node is missed; or followed by a non-tabulated empty line at line 1, column 44</a></h1>
+                <a class="post-title-link" href="/2018/03/19/20180319doc/" itemprop="url">3D Routing算法的代码的设计方案</a></h1>
         
 
         <div class="post-meta">
@@ -1666,8 +1673,8 @@ Notati
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/" itemprop="url" rel="index">
-                    <span itemprop="name">技术</span>
+                  <a href="/categories/日志/" itemprop="url" rel="index">
+                    <span itemprop="name">日志</span>
                   </a>
                 </span>
 
@@ -1705,11 +1712,15 @@ Notati
       
         
           
-          Error Information1YAMLException: incomplete explicit mapping pair; a key node is missed; or followed by a non-tabulated empty line at line 1, column 4
+          目标 目前已经完成了可以运行的代码。下一步要把代码重构，以使其支持如下功能：
+
+可以在任何时候修改reward函数。支持稀疏的以及连续的reward。
+可以选择decentralized或centralized的P网络，也就是所有agent（同个net内）共用一个或者各有一个。
+其他修改（比如act
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/03/19/20180319bug2/#more" rel="contents">
+            <a class="btn" href="/2018/03/19/20180319doc/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>

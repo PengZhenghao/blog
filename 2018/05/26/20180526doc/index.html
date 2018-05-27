@@ -83,17 +83,17 @@
 
 
 
-<meta name="description" content="Multi-region Two-Stream R-CNN for Action Detection彭老师的一篇文章。构造了一个完整的时空监测与定位系统。代码极其纷繁复杂。但是思路非常清晰。简而言之就是用帧级网络提供动作分类和BBox，而后用经典的最大子数组算法得到动作的起止时间。 首先，提出了一个专门适配于视频的Faster R-CNN。FRCNN其实就是一堆CNN加上一个精心设计的Region">
+<meta name="description" content="前言目前看到的许多文章，都可以认为是一个包含以下部分的框架：  时段propose机制 位置propose机制 Frame Embedding Video Embedding 分类机制  时段提名机制有许多，可以分为两类：一、前置类。在监督学习中，有的是使用actioness作为判断依据，再根据一些算法求得一段“预期有动作发生”的机制。二、后置类。即根据每帧的分类结果，再用一些算法求出一段某动作置">
 <meta property="og:type" content="article">
 <meta property="og:title" content="动作检测（Action Detection）文献综述-持续更新">
 <meta property="og:url" content="http://PengZhenghao.github.io/2018/05/26/20180526doc/index.html">
 <meta property="og:site_name" content="彭正皓的博客">
-<meta property="og:description" content="Multi-region Two-Stream R-CNN for Action Detection彭老师的一篇文章。构造了一个完整的时空监测与定位系统。代码极其纷繁复杂。但是思路非常清晰。简而言之就是用帧级网络提供动作分类和BBox，而后用经典的最大子数组算法得到动作的起止时间。 首先，提出了一个专门适配于视频的Faster R-CNN。FRCNN其实就是一堆CNN加上一个精心设计的Region">
+<meta property="og:description" content="前言目前看到的许多文章，都可以认为是一个包含以下部分的框架：  时段propose机制 位置propose机制 Frame Embedding Video Embedding 分类机制  时段提名机制有许多，可以分为两类：一、前置类。在监督学习中，有的是使用actioness作为判断依据，再根据一些算法求得一段“预期有动作发生”的机制。二、后置类。即根据每帧的分类结果，再用一些算法求出一段某动作置">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-05-26T13:32:26.000Z">
+<meta property="og:updated_time" content="2018-05-27T11:20:52.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="动作检测（Action Detection）文献综述-持续更新">
-<meta name="twitter:description" content="Multi-region Two-Stream R-CNN for Action Detection彭老师的一篇文章。构造了一个完整的时空监测与定位系统。代码极其纷繁复杂。但是思路非常清晰。简而言之就是用帧级网络提供动作分类和BBox，而后用经典的最大子数组算法得到动作的起止时间。 首先，提出了一个专门适配于视频的Faster R-CNN。FRCNN其实就是一堆CNN加上一个精心设计的Region">
+<meta name="twitter:description" content="前言目前看到的许多文章，都可以认为是一个包含以下部分的框架：  时段propose机制 位置propose机制 Frame Embedding Video Embedding 分类机制  时段提名机制有许多，可以分为两类：一、前置类。在监督学习中，有的是使用actioness作为判断依据，再根据一些算法求得一段“预期有动作发生”的机制。二、后置类。即根据每帧的分类结果，再用一些算法求出一段某动作置">
 
 
 
@@ -370,7 +370,20 @@
       
 
       
-        <h2 id="Multi-region-Two-Stream-R-CNN-for-Action-Detection"><a href="#Multi-region-Two-Stream-R-CNN-for-Action-Detection" class="headerlink" title="Multi-region Two-Stream R-CNN for Action Detection"></a>Multi-region Two-Stream R-CNN for Action Detection</h2><p>彭老师的一篇文章。构造了一个完整的时空监测与定位系统。代码极其纷繁复杂。但是思路非常清晰。简而言之就是用帧级网络提供动作分类和BBox，而后用经典的最大子数组算法得到动作的起止时间。</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>目前看到的许多文章，都可以认为是一个包含以下部分的框架：</p>
+<ul>
+<li>时段propose机制</li>
+<li>位置propose机制</li>
+<li>Frame Embedding</li>
+<li>Video Embedding</li>
+<li>分类机制</li>
+</ul>
+<p>时段提名机制有许多，可以分为两类：一、前置类。在监督学习中，有的是使用actioness作为判断依据，再根据一些算法求得一段“预期有动作发生”的机制。二、后置类。即根据每帧的分类结果，再用一些算法求出一段某动作置信度都比较高的时间。</p>
+<p>位置提名机制有许多。有的是在帧上，用物体检测的方法，如F-CNN等。有的是用attention机制。</p>
+<p>Frame Embedding的产生，其实就是一个输入为帧级信息的网络。现在都用Two-stream作为输入。然后在网络结构上有各式各样的设计。</p>
+<p>Video Embedding的产生，是依靠Frame Embedding的融合。有人用的是平均池化。有人用“时间金字塔”来融合。</p>
+<p>分类机制。分两类：一、视频级分类。二、帧级分类。视频级分类的输入是Video Embedding。又或者是输入所有Frame Embedding给RNN。帧级分类则是每帧都进行一次分类。然后取最大子数组什么的。目前没有看到用CRF代替RNN进行帧级分类的文章。相信效果会比RNN好——显然，前一秒是某个动作的话，下一秒不可能突变到另一个动作。</p>
+<h2 id="Multi-region-Two-Stream-R-CNN-for-Action-Detection"><a href="#Multi-region-Two-Stream-R-CNN-for-Action-Detection" class="headerlink" title="Multi-region Two-Stream R-CNN for Action Detection"></a>Multi-region Two-Stream R-CNN for Action Detection</h2><p>彭老师的一篇文章。构造了一个完整的时空监测与定位系统。代码极其纷繁复杂。但是思路非常清晰。简而言之就是用帧级网络提供动作分类和BBox，而后用经典的最大子数组算法得到动作的起止时间。</p>
 <p>首先，提出了一个专门适配于视频的Faster R-CNN。FRCNN其实就是一堆CNN加上一个精心设计的Region proposal network。在这里用了两个FRCNN，一个负责单帧的RGB帧，这对应于传统的物体检测模型，提供（类似于）people proposal。另一个RCNN的输入是Stacked的光流图。用到了给定时刻前后几针的光流，提供motion proposal。随后，给出的一堆RoI会经过一个最大值池化层，然后传给后续的网络进行分类。</p>
 <p>其次，提出了一种增加动作检测准确度的方法。最大值池化层之后，本来可以运用简单的FCN或CNN做分类。但是，这里提出了Multi-region思想，将给出的一个RoI扩展为原、上、下、边缘四个RoI，分别提交CNN去做分类，最后将四组softmax输出做求和，得到最终的分类结果。</p>
 <p>最后，给了一种从帧级网络扩展到视频级网络的方法。刚才不是得到了每个帧下的分类结果嘛，那简单的使用最大子数组算法求得开始起止就行了。</p>
@@ -388,9 +401,12 @@
 <li>将帧级网络的输出直接取平均值真的OK？一个proposal一百多秒你就取了个平均值？</li>
 <li>监督的。</li>
 </ul>
-<h2 id="End-to-end-Sequence-Labeling-via-Bi-directional-LSTM-CNNs-CRF"><a href="#End-to-end-Sequence-Labeling-via-Bi-directional-LSTM-CNNs-CRF" class="headerlink" title="End-to-end Sequence Labeling via Bi-directional LSTM-CNNs-CRF"></a>End-to-end Sequence Labeling via Bi-directional LSTM-CNNs-CRF</h2><p>看到了CRF是个很合理的东西，想把它与NN结合，没想到早就在NLP领域有人用过了。我估计在视频领域也有人用过了，但是还没细找。现在先看看这篇。我主要关心：如何把CRF做成NN中的一个层，并可以E2E的训练。</p>
+<h2 id="NLP-region-End-to-end-Sequence-Labeling-via-Bi-directional-LSTM-CNNs-CRF"><a href="#NLP-region-End-to-end-Sequence-Labeling-via-Bi-directional-LSTM-CNNs-CRF" class="headerlink" title="(NLP region) End-to-end Sequence Labeling via Bi-directional LSTM-CNNs-CRF"></a>(NLP region) End-to-end Sequence Labeling via Bi-directional LSTM-CNNs-CRF</h2><p>看到了CRF是个很合理的东西，想把它与NN结合，没想到早就在NLP领域有人用过了。我估计在视频领域也有人用过了，但是还没细找。现在先看看这篇。我主要关心：如何把CRF做成NN中的一个层，并可以E2E的训练。</p>
 <p>思路：每个单词的的one-hot形式，可以被排列成一个2D图像。用CNN对这个图像做处理，得到一个Character-level Embedding（一个单词一个Ebd）。这个C-level Ebd和一个传统的Word Ebd向量Concat起来，传给biLstm。在这个任务中，在每给定一个word的输入时，这个word对应的两个biLSTM隐含状态被输入到CRF中。CRF在这里被视为一个普通的层。它的输入是一个序列，它的输出也是一个同样长度的序列。只不过它考虑了输出序列中每个时刻的分类的前后关系。因此是一个更高级的RNN。</p>
-<h2 id="The-Moving-Pose-An-Efficient-3D-Kinematics-Descriptor-for-Low-Latency-Action-Recognition-and-Detectio"><a href="#The-Moving-Pose-An-Efficient-3D-Kinematics-Descriptor-for-Low-Latency-Action-Recognition-and-Detectio" class="headerlink" title="The Moving Pose: An Efficient 3D Kinematics Descriptor for Low-Latency Action Recognition and Detectio"></a>The Moving Pose: An Efficient 3D Kinematics Descriptor for Low-Latency Action Recognition and Detectio</h2>
+<p>文章中没有说怎么训练CRF。估计在NLP领域CRF已经是个很成熟的组件了。</p>
+<h2 id="RPAN：An-end-to-end-recurrent-pose-attention-network-for-action-recognition"><a href="#RPAN：An-end-to-end-recurrent-pose-attention-network-for-action-recognition" class="headerlink" title="RPAN：An end-to-end recurrent pose-attention network for action recognition"></a>RPAN：An end-to-end recurrent pose-attention network for action recognition</h2><p>乔老师的文章。视频级的分类。</p>
+<p>利用了Joint location标注，去训练了一个中间的attention层，从而与“直接将一个视频扔给CNN+LSTM做分类”比更高的准确度。但是需要Joint location标注。而且没有给出temporal proposal。</p>
+
       
     </div>
     
@@ -611,7 +627,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Multi-region-Two-Stream-R-CNN-for-Action-Detection"><span class="nav-number">1.</span> <span class="nav-text">Multi-region Two-Stream R-CNN for Action Detection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Temporal-Action-Detection-with-Structured-Segment-Networks"><span class="nav-number">2.</span> <span class="nav-text">Temporal Action Detection with Structured Segment Networks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#End-to-end-Sequence-Labeling-via-Bi-directional-LSTM-CNNs-CRF"><span class="nav-number">3.</span> <span class="nav-text">End-to-end Sequence Labeling via Bi-directional LSTM-CNNs-CRF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-Moving-Pose-An-Efficient-3D-Kinematics-Descriptor-for-Low-Latency-Action-Recognition-and-Detectio"><span class="nav-number">4.</span> <span class="nav-text">The Moving Pose: An Efficient 3D Kinematics Descriptor for Low-Latency Action Recognition and Detectio</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Multi-region-Two-Stream-R-CNN-for-Action-Detection"><span class="nav-number">2.</span> <span class="nav-text">Multi-region Two-Stream R-CNN for Action Detection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Temporal-Action-Detection-with-Structured-Segment-Networks"><span class="nav-number">3.</span> <span class="nav-text">Temporal Action Detection with Structured Segment Networks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NLP-region-End-to-end-Sequence-Labeling-via-Bi-directional-LSTM-CNNs-CRF"><span class="nav-number">4.</span> <span class="nav-text">(NLP region) End-to-end Sequence Labeling via Bi-directional LSTM-CNNs-CRF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RPAN：An-end-to-end-recurrent-pose-attention-network-for-action-recognition"><span class="nav-number">5.</span> <span class="nav-text">RPAN：An end-to-end recurrent pose-attention network for action recognition</span></a></li></ol></div>
             
 
           </div>
