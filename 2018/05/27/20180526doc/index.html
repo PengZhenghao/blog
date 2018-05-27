@@ -86,11 +86,11 @@
 <meta name="description" content="前言目前看到的许多文章，都可以认为是一个包含以下部分的框架：  时段propose机制 位置propose机制 Frame Embedding Video Embedding 分类机制  时段提名机制有许多，可以分为两类：一、前置类。在监督学习中，有的是使用actioness作为判断依据，再根据一些算法求得一段“预期有动作发生”的机制。二、后置类。即根据每帧的分类结果，再用一些算法求出一段某动作置">
 <meta property="og:type" content="article">
 <meta property="og:title" content="动作检测（Action Detection）文献综述-持续更新">
-<meta property="og:url" content="http://PengZhenghao.github.io/2018/05/26/20180526doc/index.html">
+<meta property="og:url" content="http://PengZhenghao.github.io/2018/05/27/20180526doc/index.html">
 <meta property="og:site_name" content="彭正皓的博客">
 <meta property="og:description" content="前言目前看到的许多文章，都可以认为是一个包含以下部分的框架：  时段propose机制 位置propose机制 Frame Embedding Video Embedding 分类机制  时段提名机制有许多，可以分为两类：一、前置类。在监督学习中，有的是使用actioness作为判断依据，再根据一些算法求得一段“预期有动作发生”的机制。二、后置类。即根据每帧的分类结果，再用一些算法求出一段某动作置">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-05-27T11:20:52.000Z">
+<meta property="og:updated_time" content="2018-05-27T13:48:20.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="动作检测（Action Detection）文献综述-持续更新">
 <meta name="twitter:description" content="前言目前看到的许多文章，都可以认为是一个包含以下部分的框架：  时段propose机制 位置propose机制 Frame Embedding Video Embedding 分类机制  时段提名机制有许多，可以分为两类：一、前置类。在监督学习中，有的是使用actioness作为判断依据，再根据一些算法求得一段“预期有动作发生”的机制。二、后置类。即根据每帧的分类结果，再用一些算法求出一段某动作置">
@@ -123,7 +123,7 @@
 
 
 
-  <link rel="canonical" href="http://PengZhenghao.github.io/2018/05/26/20180526doc/"/>
+  <link rel="canonical" href="http://PengZhenghao.github.io/2018/05/27/20180526doc/"/>
 
 
 
@@ -276,7 +276,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://PengZhenghao.github.io/2018/05/26/20180526doc/">
+    <link itemprop="mainEntityOfPage" href="http://PengZhenghao.github.io/2018/05/27/20180526doc/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="彭正皓">
@@ -305,8 +305,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-26T15:41:25+08:00">
-                2018-05-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-27T15:41:25+08:00">
+                2018-05-27
               </time>
             
 
@@ -406,6 +406,19 @@
 <p>文章中没有说怎么训练CRF。估计在NLP领域CRF已经是个很成熟的组件了。</p>
 <h2 id="RPAN：An-end-to-end-recurrent-pose-attention-network-for-action-recognition"><a href="#RPAN：An-end-to-end-recurrent-pose-attention-network-for-action-recognition" class="headerlink" title="RPAN：An end-to-end recurrent pose-attention network for action recognition"></a>RPAN：An end-to-end recurrent pose-attention network for action recognition</h2><p>乔老师的文章。视频级的分类。</p>
 <p>利用了Joint location标注，去训练了一个中间的attention层，从而与“直接将一个视频扔给CNN+LSTM做分类”比更高的准确度。但是需要Joint location标注。而且没有给出temporal proposal。</p>
+<h2 id="RED-Reinforced-Encoder-Decoder-Networks-for-Action-Anticipation"><a href="#RED-Reinforced-Encoder-Decoder-Networks-for-Action-Anticipation" class="headerlink" title="RED: Reinforced Encoder-Decoder Networks for Action Anticipation"></a>RED: Reinforced Encoder-Decoder Networks for Action Anticipation</h2><p>2017年7月的文章。用到了强化学习。</p>
+<p>过去的方法要不是利用LSTM读取旧视频的信息给出分类，要不就是用前一帧去生成下一帧的视频的Frame embedding，然后在给这个Embedding分类。</p>
+<ul>
+<li>Video representation extractor: 两种：two-stream CNN（6帧光流CNN得到motion，最中间的一帧用CNN得到apperance），VGG-16（只用中间帧）</li>
+<li>encoder-decoder network：Encoder是一个LSTM。last hidden state给Decoder。Decoder输出一组Frame representation。用平方误差来做loss。（<strong>疑惑：</strong>原来的Representation是包含了6帧信息的CNN的输出。你让一个Lstm来做不合理吧？而且人家是6帧合一啊，你这个一帧输出的算个什么东西呢？）</li>
+<li>classification network：LSTM不是输出了许多帧嘛，每一帧做一次分类。然后Loss就把分类和ground truth的对数熵做两个求和：时间和类别，堆起来就好。</li>
+<li>reinforcement module/policy gradient algorithm: 以feature vector作为observation，以分类作为action。得到一个J函数（训练Policy网络的那个常用函数啦）作为loss，加到总loss里。</li>
+</ul>
+<p>这里的RL组件，是一种非常奇怪的RL。我认为，可以直接用一个经过修改的Loss函数代替。</p>
+<p>我这里说的这么绝对，似乎有被打脸的风险。但是我还是觉得这篇文章的用法完全不妥：RL讲究的是在当前状态下，你选取了某个动作，从而环境的状态从现在的状态转移到了另一个状态。如果状态的转移过程和你选了哪个动作没有关系的话，那么这个动作对应的reward就无从谈起了。但是在这里，Reward函数是设计的跟(state, action)有关了，但是跟next state无关。<strong>我认为这个地方的RL是个幌子，其本质只是在Loss函数中加了一个正则项。</strong></p>
+<p>但是他的思想是值得肯定的，那就是Reward的设计，和“追求更早的发现异常”这个追求。</p>
+<p>这篇文章作为难得的Online检测的文章，主要是设计了anticipation网络。其本质是用LSTM去模仿下一帧的representation。等于说生生造出了一个视频。然后用这个representation结合老方法去做classification。</p>
+<p>本文的弊端还是很多的。第一是RL模块很迷。第二是这个网络既没有Action Region Proposal，也没有Start time proposal，也没有更多的可以挖掘的地方，比如说概率的累加问题、计算效率等等。</p>
 
       
     </div>
@@ -627,7 +640,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Multi-region-Two-Stream-R-CNN-for-Action-Detection"><span class="nav-number">2.</span> <span class="nav-text">Multi-region Two-Stream R-CNN for Action Detection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Temporal-Action-Detection-with-Structured-Segment-Networks"><span class="nav-number">3.</span> <span class="nav-text">Temporal Action Detection with Structured Segment Networks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NLP-region-End-to-end-Sequence-Labeling-via-Bi-directional-LSTM-CNNs-CRF"><span class="nav-number">4.</span> <span class="nav-text">(NLP region) End-to-end Sequence Labeling via Bi-directional LSTM-CNNs-CRF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RPAN：An-end-to-end-recurrent-pose-attention-network-for-action-recognition"><span class="nav-number">5.</span> <span class="nav-text">RPAN：An end-to-end recurrent pose-attention network for action recognition</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Multi-region-Two-Stream-R-CNN-for-Action-Detection"><span class="nav-number">2.</span> <span class="nav-text">Multi-region Two-Stream R-CNN for Action Detection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Temporal-Action-Detection-with-Structured-Segment-Networks"><span class="nav-number">3.</span> <span class="nav-text">Temporal Action Detection with Structured Segment Networks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NLP-region-End-to-end-Sequence-Labeling-via-Bi-directional-LSTM-CNNs-CRF"><span class="nav-number">4.</span> <span class="nav-text">(NLP region) End-to-end Sequence Labeling via Bi-directional LSTM-CNNs-CRF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RPAN：An-end-to-end-recurrent-pose-attention-network-for-action-recognition"><span class="nav-number">5.</span> <span class="nav-text">RPAN：An end-to-end recurrent pose-attention network for action recognition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RED-Reinforced-Encoder-Decoder-Networks-for-Action-Anticipation"><span class="nav-number">6.</span> <span class="nav-text">RED: Reinforced Encoder-Decoder Networks for Action Anticipation</span></a></li></ol></div>
             
 
           </div>
