@@ -83,22 +83,25 @@
 
 
 
-<meta name="description" content="前言目前看到的许多文章，都可以认为是一个包含以下部分的框架：  帧采样机制 时段propose机制 位置propose机制 Frame Embedding Video Embedding 分类机制  帧采样机制有许多做法：1. 在整个视频中均匀地采样给定数目的帧。（Weakly2018）2.  时段提名机制有许多，可以分为两类：一、前置类。在监督学习中，有的是使用actioness作为判断依据，再">
+<meta name="description" content="目录[TOC] 前言目前看到的许多文章，都可以认为是一个包含以下部分的框架：  帧采样机制 时段propose机制 位置propose机制 Frame Embedding Video Embedding 分类机制  帧采样机制有许多做法：1. 在整个视频中均匀地采样给定数目的帧。（Weakly2018）2.  时段提名机制有许多，可以分为两类：一、前置类。在监督学习中，有的是使用actioness">
 <meta property="og:type" content="article">
 <meta property="og:title" content="动作检测（Action Detection）文献综述-持续更新">
-<meta property="og:url" content="http://PengZhenghao.github.io/2018/05/27/20180526doc/index.html">
+<meta property="og:url" content="http://PengZhenghao.github.io/2018/06/02/20180526doc/index.html">
 <meta property="og:site_name" content="彭正皓的博客">
-<meta property="og:description" content="前言目前看到的许多文章，都可以认为是一个包含以下部分的框架：  帧采样机制 时段propose机制 位置propose机制 Frame Embedding Video Embedding 分类机制  帧采样机制有许多做法：1. 在整个视频中均匀地采样给定数目的帧。（Weakly2018）2.  时段提名机制有许多，可以分为两类：一、前置类。在监督学习中，有的是使用actioness作为判断依据，再">
+<meta property="og:description" content="目录[TOC] 前言目前看到的许多文章，都可以认为是一个包含以下部分的框架：  帧采样机制 时段propose机制 位置propose机制 Frame Embedding Video Embedding 分类机制  帧采样机制有许多做法：1. 在整个视频中均匀地采样给定数目的帧。（Weakly2018）2.  时段提名机制有许多，可以分为两类：一、前置类。在监督学习中，有的是使用actioness">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://pengzhenghao.github.io/2018/05/27/20180526doc/domain2016.png">
-<meta property="og:image" content="http://pengzhenghao.github.io/2018/05/27/20180526doc/semi2015.png">
-<meta property="og:image" content="http://pengzhenghao.github.io/2018/05/27/20180526doc/weakly20182.png">
-<meta property="og:image" content="http://pengzhenghao.github.io/2018/05/27/20180526doc/weakly2018.png">
-<meta property="og:updated_time" content="2018-06-02T10:59:42.000Z">
+<meta property="og:image" content="http://pengzhenghao.github.io/2018/06/02/20180526doc/domain2016.png">
+<meta property="og:image" content="http://pengzhenghao.github.io/2018/06/02/20180526doc/semi2015.png">
+<meta property="og:image" content="http://pengzhenghao.github.io/2018/06/02/20180526doc/weakly20182.png">
+<meta property="og:image" content="http://pengzhenghao.github.io/2018/06/02/20180526doc/weakly2018.png">
+<meta property="og:image" content="http://pengzhenghao.github.io/2018/06/02/20180526doc/is2016.png">
+<meta property="og:image" content="http://pengzhenghao.github.io/2018/06/02/20180526doc/wsddn20161.png">
+<meta property="og:image" content="http://pengzhenghao.github.io/2018/06/02/20180526doc/wsddn20162.png">
+<meta property="og:updated_time" content="2018-06-02T11:31:53.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="动作检测（Action Detection）文献综述-持续更新">
-<meta name="twitter:description" content="前言目前看到的许多文章，都可以认为是一个包含以下部分的框架：  帧采样机制 时段propose机制 位置propose机制 Frame Embedding Video Embedding 分类机制  帧采样机制有许多做法：1. 在整个视频中均匀地采样给定数目的帧。（Weakly2018）2.  时段提名机制有许多，可以分为两类：一、前置类。在监督学习中，有的是使用actioness作为判断依据，再">
-<meta name="twitter:image" content="http://pengzhenghao.github.io/2018/05/27/20180526doc/domain2016.png">
+<meta name="twitter:description" content="目录[TOC] 前言目前看到的许多文章，都可以认为是一个包含以下部分的框架：  帧采样机制 时段propose机制 位置propose机制 Frame Embedding Video Embedding 分类机制  帧采样机制有许多做法：1. 在整个视频中均匀地采样给定数目的帧。（Weakly2018）2.  时段提名机制有许多，可以分为两类：一、前置类。在监督学习中，有的是使用actioness">
+<meta name="twitter:image" content="http://pengzhenghao.github.io/2018/06/02/20180526doc/domain2016.png">
 
 
 
@@ -128,7 +131,7 @@
 
 
 
-  <link rel="canonical" href="http://PengZhenghao.github.io/2018/05/27/20180526doc/"/>
+  <link rel="canonical" href="http://PengZhenghao.github.io/2018/06/02/20180526doc/"/>
 
 
 
@@ -281,7 +284,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://PengZhenghao.github.io/2018/05/27/20180526doc/">
+    <link itemprop="mainEntityOfPage" href="http://PengZhenghao.github.io/2018/06/02/20180526doc/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="彭正皓">
@@ -310,8 +313,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-27T15:41:25+08:00">
-                2018-05-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-02T15:41:25+08:00">
+                2018-06-02
               </time>
             
 
@@ -375,7 +378,8 @@
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>目前看到的许多文章，都可以认为是一个包含以下部分的框架：</p>
+        <h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><p>[TOC]</p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>目前看到的许多文章，都可以认为是一个包含以下部分的框架：</p>
 <ul>
 <li>帧采样机制</li>
 <li>时段propose机制</li>
@@ -410,7 +414,11 @@
 <p>添加了一个权重单元，从而使得在生成Video Representation的时候，加权地pooling不同帧的Representation。注意这个权重单元是“动作无关”的。</p>
 <p>由“ Learning deep features for discriminative localization”启发设计了Temporal Class Activation Mapping(T-CAM)。其实是利用了分类器的激活值，来知道<br>“这一刻，此动作有没有在发生”。</p>
 <p>时段proposal机制：利用T-CAM，经过threshold，得到的许多许多段视频。就完了。我个人觉得如果用了CUHK的那个水淹算法可能会更好。</p>
-<h1 id="监督学习"><a href="#监督学习" class="headerlink" title="监督学习"></a>监督学习</h1><h2 id="Quo-vadis-action-recognition-a-new-model-and-the-kinetics-dataset"><a href="#Quo-vadis-action-recognition-a-new-model-and-the-kinetics-dataset" class="headerlink" title="Quo vadis, action recognition? a new model and the kinetics dataset"></a>Quo vadis, action recognition? a new model and the kinetics dataset</h2><p>提出了kinetics数据集，用来做迁移学习效果极佳。没有细看。</p>
+<h2 id="Is-object-localization-for-free-Weakly-supervised-learning-with-convolutional-neural-network"><a href="#Is-object-localization-for-free-Weakly-supervised-learning-with-convolutional-neural-network" class="headerlink" title="Is object localization for free? Weakly-supervised learning with convolutional neural network"></a>Is object localization for free? Weakly-supervised learning with convolutional neural network</h2><p><img src="is2016.png" alt=""><br>网络结构是在Alexnet的基础上，将第六、七层的全连接层改为卷积层，再加上两层自适应卷积层，最后一个自适应卷积层后面添加max-pooling层，输出响应最大的点。因为整个网络只有卷积层，所以对输入图像的大小没有限制，前五个卷积层是在Imagenet上进行训练的，后面的几层是在Pascal数据集上进行训练的，所以虽然层数很多，但总体的训练时间没有很长。 </p>
+<p>作者自行定义的定位的衡量标准：作者是将max-pooling的输出映射到原图，然后将结果与bounding-box标注的结果进行比较，容忍度为18个像素，即将bounding-box向外扩18个像素，如果结果在此之内，则认为定位正确。 （为什么不用IoU啊……）</p>
+<p>实验很丰富，任何trick，都有实验证明其是否有效。 </p>
+<h2 id="Weakly-Supervised-Deep-Detection-Networks"><a href="#Weakly-Supervised-Deep-Detection-Networks" class="headerlink" title="Weakly Supervised Deep Detection Networks"></a>Weakly Supervised Deep Detection Networks</h2><p><img src="wsddn20161.png" alt=""><br><img src="wsddn20162.png" alt=""><br>ImageNet预训练过的CNN。将features一方面：传给一个Region Proposal的算法SSW或EB形成proposal。另一方面：将Proposal和原来的feature结合，传给一个SPP（空间金字塔池化层）。之后把全连接层fc7的输出分成两路，一路做分类，一路做检测。检测就是“到底有没有物体”</p>
+<h2 id="Weakly-Supervised-Semantic-Segmentation-using-Web-Crawled-Videos"><a href="#Weakly-Supervised-Semantic-Segmentation-using-Web-Crawled-Videos" class="headerlink" title="Weakly Supervised Semantic Segmentation using Web-Crawled Videos"></a>Weakly Supervised Semantic Segmentation using Web-Crawled Videos</h2><h1 id="监督学习"><a href="#监督学习" class="headerlink" title="监督学习"></a>监督学习</h1><h2 id="Quo-vadis-action-recognition-a-new-model-and-the-kinetics-dataset"><a href="#Quo-vadis-action-recognition-a-new-model-and-the-kinetics-dataset" class="headerlink" title="Quo vadis, action recognition? a new model and the kinetics dataset"></a>Quo vadis, action recognition? a new model and the kinetics dataset</h2><p>提出了kinetics数据集，用来做迁移学习效果极佳。没有细看。</p>
 <p><strong>这篇文章应该对我们选取数据集有很大帮助。</strong></p>
 <h2 id="Multi-region-Two-Stream-R-CNN-for-Action-Detection"><a href="#Multi-region-Two-Stream-R-CNN-for-Action-Detection" class="headerlink" title="Multi-region Two-Stream R-CNN for Action Detection"></a>Multi-region Two-Stream R-CNN for Action Detection</h2><p>彭老师的一篇文章。构造了一个完整的时空监测与定位系统。代码极其纷繁复杂。但是思路非常清晰。简而言之就是用帧级网络提供动作分类和BBox，而后用经典的最大子数组算法得到动作的起止时间。</p>
 <p>首先，提出了一个专门适配于视频的Faster R-CNN。FRCNN其实就是一堆CNN加上一个精心设计的Region proposal network。在这里用了两个FRCNN，一个负责单帧的RGB帧，这对应于传统的物体检测模型，提供（类似于）people proposal。另一个RCNN的输入是Stacked的光流图。用到了给定时刻前后几针的光流，提供motion proposal。随后，给出的一堆RoI会经过一个最大值池化层，然后传给后续的网络进行分类。</p>
@@ -669,7 +677,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#半监督学习"><span class="nav-text">半监督学习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#GAN-semi-Supervised-Improved-Techniques-for-Training-GANs"><span class="nav-text">(GAN, semi-Supervised) Improved Techniques for Training GANs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#semi-Supervised-Transfer-learning-Domain-Adversarial-Training-of-Neural-Networks"><span class="nav-text">(semi-Supervised, Transfer learning) Domain-Adversarial Training of Neural Networks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ML-Semi-Supervised-Learning-with-Ladder-Networks"><span class="nav-text">(ML) Semi-Supervised Learning with Ladder Networks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ML-Distributional-Smoothing-with-Virtual-Adversarial-Training"><span class="nav-text">(ML) Distributional Smoothing with Virtual Adversarial Training</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#弱监督学习"><span class="nav-text">弱监督学习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Weakly-Supervised-Action-Localization-by-Sparse-Temporal-Pooling-Network"><span class="nav-text">Weakly Supervised Action Localization by Sparse Temporal Pooling Network</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#监督学习"><span class="nav-text">监督学习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quo-vadis-action-recognition-a-new-model-and-the-kinetics-dataset"><span class="nav-text">Quo vadis, action recognition? a new model and the kinetics dataset</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Multi-region-Two-Stream-R-CNN-for-Action-Detection"><span class="nav-text">Multi-region Two-Stream R-CNN for Action Detection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Temporal-Action-Detection-with-Structured-Segment-Networks"><span class="nav-text">Temporal Action Detection with Structured Segment Networks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RPAN：An-end-to-end-recurrent-pose-attention-network-for-action-recognition"><span class="nav-text">RPAN：An end-to-end recurrent pose-attention network for action recognition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Online-RED-Reinforced-Encoder-Decoder-Networks-for-Action-Anticipation"><span class="nav-text">(Online) RED: Reinforced Encoder-Decoder Networks for Action Anticipation</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#跨领域参考"><span class="nav-text">跨领域参考</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#NLP-region-End-to-end-Sequence-Labeling-via-Bi-directional-LSTM-CNNs-CRF"><span class="nav-text">(NLP region) End-to-end Sequence Labeling via Bi-directional LSTM-CNNs-CRF</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#目录"><span class="nav-text">目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#半监督学习"><span class="nav-text">半监督学习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#GAN-semi-Supervised-Improved-Techniques-for-Training-GANs"><span class="nav-text">(GAN, semi-Supervised) Improved Techniques for Training GANs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#semi-Supervised-Transfer-learning-Domain-Adversarial-Training-of-Neural-Networks"><span class="nav-text">(semi-Supervised, Transfer learning) Domain-Adversarial Training of Neural Networks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ML-Semi-Supervised-Learning-with-Ladder-Networks"><span class="nav-text">(ML) Semi-Supervised Learning with Ladder Networks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ML-Distributional-Smoothing-with-Virtual-Adversarial-Training"><span class="nav-text">(ML) Distributional Smoothing with Virtual Adversarial Training</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#弱监督学习"><span class="nav-text">弱监督学习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Weakly-Supervised-Action-Localization-by-Sparse-Temporal-Pooling-Network"><span class="nav-text">Weakly Supervised Action Localization by Sparse Temporal Pooling Network</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Is-object-localization-for-free-Weakly-supervised-learning-with-convolutional-neural-network"><span class="nav-text">Is object localization for free? Weakly-supervised learning with convolutional neural network</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Weakly-Supervised-Deep-Detection-Networks"><span class="nav-text">Weakly Supervised Deep Detection Networks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Weakly-Supervised-Semantic-Segmentation-using-Web-Crawled-Videos"><span class="nav-text">Weakly Supervised Semantic Segmentation using Web-Crawled Videos</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#监督学习"><span class="nav-text">监督学习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quo-vadis-action-recognition-a-new-model-and-the-kinetics-dataset"><span class="nav-text">Quo vadis, action recognition? a new model and the kinetics dataset</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Multi-region-Two-Stream-R-CNN-for-Action-Detection"><span class="nav-text">Multi-region Two-Stream R-CNN for Action Detection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Temporal-Action-Detection-with-Structured-Segment-Networks"><span class="nav-text">Temporal Action Detection with Structured Segment Networks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RPAN：An-end-to-end-recurrent-pose-attention-network-for-action-recognition"><span class="nav-text">RPAN：An end-to-end recurrent pose-attention network for action recognition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Online-RED-Reinforced-Encoder-Decoder-Networks-for-Action-Anticipation"><span class="nav-text">(Online) RED: Reinforced Encoder-Decoder Networks for Action Anticipation</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#跨领域参考"><span class="nav-text">跨领域参考</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#NLP-region-End-to-end-Sequence-Labeling-via-Bi-directional-LSTM-CNNs-CRF"><span class="nav-text">(NLP region) End-to-end Sequence Labeling via Bi-directional LSTM-CNNs-CRF</span></a></li></ol></li></ol></div>
             
 
           </div>
