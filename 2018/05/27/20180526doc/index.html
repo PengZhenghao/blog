@@ -90,15 +90,15 @@
 <meta property="og:site_name" content="彭正皓的博客">
 <meta property="og:description" content="前言目前看到的许多文章，都可以认为是一个包含以下部分的框架：  帧采样机制 时段propose机制 位置propose机制 Frame Embedding Video Embedding 分类机制  帧采样机制有许多做法：1. 在整个视频中均匀地采样给定数目的帧。（Weakly2018）2.  时段提名机制有许多，可以分为两类：一、前置类。在监督学习中，有的是使用actioness作为判断依据，再">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://pengzhenghao.github.io/2018/05/27/20180526doc/20180526doc/domain2016.png">
+<meta property="og:image" content="http://pengzhenghao.github.io/2018/05/27/20180526doc/domain2016.png">
 <meta property="og:image" content="http://pengzhenghao.github.io/2018/05/27/20180526doc/semi2015.png">
-<meta property="og:image" content="http://pengzhenghao.github.io/2018/05/27/20180526doc/20180526doc/weakly20182.png">
-<meta property="og:image" content="http://pengzhenghao.github.io/2018/05/27/20180526doc/20180526doc/weakly2018.png">
-<meta property="og:updated_time" content="2018-06-02T10:58:51.000Z">
+<meta property="og:image" content="http://pengzhenghao.github.io/2018/05/27/20180526doc/weakly20182.png">
+<meta property="og:image" content="http://pengzhenghao.github.io/2018/05/27/20180526doc/weakly2018.png">
+<meta property="og:updated_time" content="2018-06-02T10:59:42.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="动作检测（Action Detection）文献综述-持续更新">
 <meta name="twitter:description" content="前言目前看到的许多文章，都可以认为是一个包含以下部分的框架：  帧采样机制 时段propose机制 位置propose机制 Frame Embedding Video Embedding 分类机制  帧采样机制有许多做法：1. 在整个视频中均匀地采样给定数目的帧。（Weakly2018）2.  时段提名机制有许多，可以分为两类：一、前置类。在监督学习中，有的是使用actioness作为判断依据，再">
-<meta name="twitter:image" content="http://pengzhenghao.github.io/2018/05/27/20180526doc/20180526doc/domain2016.png">
+<meta name="twitter:image" content="http://pengzhenghao.github.io/2018/05/27/20180526doc/domain2016.png">
 
 
 
@@ -395,7 +395,7 @@
 <script type="math/tex; mode=display">L = L_{supervised} + L_{unsupervised}</script><script type="math/tex; mode=display">L_{supervised} = -E[\log p_{model}(y|x)]</script><script type="math/tex; mode=display">L_{unsupervised} = -\{E_{p_{data}}[\log [1 -  p_{model} (y=K+1|x) + E_{generated}[\log p_{model} (y=K+1|x)]\}</script><p>前一项是普通的分类误差，第二项是判别误差。<br>猪的注意的是将$D(x) = 1-p_{model} (y=K+1|x)$的话则</p>
 <script type="math/tex; mode=display">L_{unsupervised} = -E_{x\sim p_{data}(x)}\log D(x) + E_{z\sim noise}\log (1-D(G(Z)))</script><p>正是GAN的形式。</p>
 <p>补充：<a href="https://blog.csdn.net/qq_25737169/article/details/78532719" target="_blank" rel="noopener">网友</a>说：“在代码中我给出了两种损失函数，一个是原始GAN的交叉熵损失函数，和DCGAN使用的一样，另外一个是improved wgan论文中使用的损失函数，但是在做了对比之后，我强烈建议使用DCGAN来做，improved wgan的损失函数虽然在生成结果的优化上有很大帮助，但是并不适合半监督学习中。”</p>
-<h2 id="semi-Supervised-Transfer-learning-Domain-Adversarial-Training-of-Neural-Networks"><a href="#semi-Supervised-Transfer-learning-Domain-Adversarial-Training-of-Neural-Networks" class="headerlink" title="(semi-Supervised, Transfer learning) Domain-Adversarial Training of Neural Networks"></a>(semi-Supervised, Transfer learning) Domain-Adversarial Training of Neural Networks</h2><p><img src="20180526doc/domain2016.png" alt=""><br>单输入多输出网络。对于有lebel的数据，最小化分类误差和域误差。对于无label的数据，最小化域误差。<br>所谓域误差，就是一个分类器，判定这个数据是来自有lebel那类的还是没label那类的。它的目的，是要调整网络参数，使得网络的隐含层对输入数据有无label不敏感，即将有label的数据和无label的数据混在一起。这其实利用了一个假设：有无label的数据的分布是一样的。那既然是一样的，就意味着虽然无label的数据没有label，但是它应该和同属于一类的有label的数据聚集在一起，所以如果利用域分类器来将它们混在一起，那么等于说网络从无label的分布中，领悟到了“到底啥样的数据应该要聚在一起”，即从无label的数据中学习到了数据的一些基本的结构，从而帮助了有监督学习。</p>
+<h2 id="semi-Supervised-Transfer-learning-Domain-Adversarial-Training-of-Neural-Networks"><a href="#semi-Supervised-Transfer-learning-Domain-Adversarial-Training-of-Neural-Networks" class="headerlink" title="(semi-Supervised, Transfer learning) Domain-Adversarial Training of Neural Networks"></a>(semi-Supervised, Transfer learning) Domain-Adversarial Training of Neural Networks</h2><p><img src="domain2016.png" alt=""><br>单输入多输出网络。对于有lebel的数据，最小化分类误差和域误差。对于无label的数据，最小化域误差。<br>所谓域误差，就是一个分类器，判定这个数据是来自有lebel那类的还是没label那类的。它的目的，是要调整网络参数，使得网络的隐含层对输入数据有无label不敏感，即将有label的数据和无label的数据混在一起。这其实利用了一个假设：有无label的数据的分布是一样的。那既然是一样的，就意味着虽然无label的数据没有label，但是它应该和同属于一类的有label的数据聚集在一起，所以如果利用域分类器来将它们混在一起，那么等于说网络从无label的分布中，领悟到了“到底啥样的数据应该要聚在一起”，即从无label的数据中学习到了数据的一些基本的结构，从而帮助了有监督学习。</p>
 <h2 id="ML-Semi-Supervised-Learning-with-Ladder-Networks"><a href="#ML-Semi-Supervised-Learning-with-Ladder-Networks" class="headerlink" title="(ML) Semi-Supervised Learning with Ladder Networks"></a>(ML) Semi-Supervised Learning with Ladder Networks</h2><p><img src="semi2015.png" alt=""><br>我们知道，拿一个纯正的x去预测一个纯正的y，这是监督任务。<br>我们知道AutoEncoder可以拿一个x去形成representation，再reconstruct一个新x。输入的x甚至可以使Corrupted的。<br>我们还知道AE的loss是新x和输入x的差的一个范数。</p>
 <p>如果把AE的思想和监督任务的思想结合起来，并且扩展AE的任务：<br>不仅要reconstruct输入，而且要reconstruct所有隐含层。并且增加一个原隐含层和打算重构的隐含层之间的短路连接。那这就是一个很复杂的AE。注意有三个$z$，一个是干净的x前馈后得到的$z$，一个是有噪音的x前馈后得到的$\tilde{z}$，一个是由输入不干净的x的重构层的$\hat{z}$。</p>
 <script type="math/tex; mode=display">Reconstruct Loss = || z^{(l)} - \hat{z}^{(l)}||</script><p>如果我们再在中间层加一个岔口，叉出去后加一个激活函数层变成了最终label的输出y，那么就可以把有监督任务和无监督任务放在一起变成半监督任务了。</p>
@@ -406,7 +406,7 @@
 <script type="math/tex; mode=display">Loss_{LDS} = \cfrac{1}{N}\sum^{N}_{n=1} -\Delta_{KL}(r^{(n)}_{v-adv}, x^{(n)}, \theta)</script><p>由于我们虚拟了一个样本$x+r_{v-adv}$，所以叫VAT。另外上面的LDS，指的就是Local distributional smoothing。可以认为是一种正则化方法，将分布更均匀化了。</p>
 <h1 id="弱监督学习"><a href="#弱监督学习" class="headerlink" title="弱监督学习"></a>弱监督学习</h1><p>弱监督学习的label只有动作分类，而没有详细的动作开始和结束的时间。</p>
 <p><strong>！注意：在动作检测领域，有些数据集甚至是这样的：有所有动作的标签，但是只有一部分样本有时间定位。这其实是半监督学习和弱监督学习都有的情况。</strong></p>
-<h2 id="Weakly-Supervised-Action-Localization-by-Sparse-Temporal-Pooling-Network"><a href="#Weakly-Supervised-Action-Localization-by-Sparse-Temporal-Pooling-Network" class="headerlink" title="Weakly Supervised Action Localization by Sparse Temporal Pooling Network"></a>Weakly Supervised Action Localization by Sparse Temporal Pooling Network</h2><p><img src="20180526doc/weakly20182.png" alt="网络结构"><br><img src="20180526doc/weakly2018.png" alt="网络结构"><br>帧级网络：“Quovadis,actionrecognition? a new model and the kinetics dataset”提供的</p>
+<h2 id="Weakly-Supervised-Action-Localization-by-Sparse-Temporal-Pooling-Network"><a href="#Weakly-Supervised-Action-Localization-by-Sparse-Temporal-Pooling-Network" class="headerlink" title="Weakly Supervised Action Localization by Sparse Temporal Pooling Network"></a>Weakly Supervised Action Localization by Sparse Temporal Pooling Network</h2><p><img src="weakly20182.png" alt="网络结构"><br><img src="weakly2018.png" alt="网络结构"><br>帧级网络：“Quovadis,actionrecognition? a new model and the kinetics dataset”提供的</p>
 <p>添加了一个权重单元，从而使得在生成Video Representation的时候，加权地pooling不同帧的Representation。注意这个权重单元是“动作无关”的。</p>
 <p>由“ Learning deep features for discriminative localization”启发设计了Temporal Class Activation Mapping(T-CAM)。其实是利用了分类器的激活值，来知道<br>“这一刻，此动作有没有在发生”。</p>
 <p>时段proposal机制：利用T-CAM，经过threshold，得到的许多许多段视频。就完了。我个人觉得如果用了CUHK的那个水淹算法可能会更好。</p>
