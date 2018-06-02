@@ -91,10 +91,10 @@
 <meta property="og:description" content="前言目前看到的许多文章，都可以认为是一个包含以下部分的框架：  帧采样机制 时段propose机制 位置propose机制 Frame Embedding Video Embedding 分类机制  帧采样机制有许多做法：1. 在整个视频中均匀地采样给定数目的帧。（Weakly2018）2.  时段提名机制有许多，可以分为两类：一、前置类。在监督学习中，有的是使用actioness作为判断依据，再">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://pengzhenghao.github.io/2018/05/27/20180526doc/20180526doc/domain2016.png">
-<meta property="og:image" content="http://pengzhenghao.github.io/2018/05/27/20180526doc/20180526doc/semi2015.png">
+<meta property="og:image" content="http://pengzhenghao.github.io/2018/05/27/20180526doc/semi2015.png">
 <meta property="og:image" content="http://pengzhenghao.github.io/2018/05/27/20180526doc/20180526doc/weakly20182.png">
 <meta property="og:image" content="http://pengzhenghao.github.io/2018/05/27/20180526doc/20180526doc/weakly2018.png">
-<meta property="og:updated_time" content="2018-06-02T10:57:25.000Z">
+<meta property="og:updated_time" content="2018-06-02T10:58:51.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="动作检测（Action Detection）文献综述-持续更新">
 <meta name="twitter:description" content="前言目前看到的许多文章，都可以认为是一个包含以下部分的框架：  帧采样机制 时段propose机制 位置propose机制 Frame Embedding Video Embedding 分类机制  帧采样机制有许多做法：1. 在整个视频中均匀地采样给定数目的帧。（Weakly2018）2.  时段提名机制有许多，可以分为两类：一、前置类。在监督学习中，有的是使用actioness作为判断依据，再">
@@ -396,7 +396,7 @@
 <script type="math/tex; mode=display">L_{unsupervised} = -E_{x\sim p_{data}(x)}\log D(x) + E_{z\sim noise}\log (1-D(G(Z)))</script><p>正是GAN的形式。</p>
 <p>补充：<a href="https://blog.csdn.net/qq_25737169/article/details/78532719" target="_blank" rel="noopener">网友</a>说：“在代码中我给出了两种损失函数，一个是原始GAN的交叉熵损失函数，和DCGAN使用的一样，另外一个是improved wgan论文中使用的损失函数，但是在做了对比之后，我强烈建议使用DCGAN来做，improved wgan的损失函数虽然在生成结果的优化上有很大帮助，但是并不适合半监督学习中。”</p>
 <h2 id="semi-Supervised-Transfer-learning-Domain-Adversarial-Training-of-Neural-Networks"><a href="#semi-Supervised-Transfer-learning-Domain-Adversarial-Training-of-Neural-Networks" class="headerlink" title="(semi-Supervised, Transfer learning) Domain-Adversarial Training of Neural Networks"></a>(semi-Supervised, Transfer learning) Domain-Adversarial Training of Neural Networks</h2><p><img src="20180526doc/domain2016.png" alt=""><br>单输入多输出网络。对于有lebel的数据，最小化分类误差和域误差。对于无label的数据，最小化域误差。<br>所谓域误差，就是一个分类器，判定这个数据是来自有lebel那类的还是没label那类的。它的目的，是要调整网络参数，使得网络的隐含层对输入数据有无label不敏感，即将有label的数据和无label的数据混在一起。这其实利用了一个假设：有无label的数据的分布是一样的。那既然是一样的，就意味着虽然无label的数据没有label，但是它应该和同属于一类的有label的数据聚集在一起，所以如果利用域分类器来将它们混在一起，那么等于说网络从无label的分布中，领悟到了“到底啥样的数据应该要聚在一起”，即从无label的数据中学习到了数据的一些基本的结构，从而帮助了有监督学习。</p>
-<h2 id="ML-Semi-Supervised-Learning-with-Ladder-Networks"><a href="#ML-Semi-Supervised-Learning-with-Ladder-Networks" class="headerlink" title="(ML) Semi-Supervised Learning with Ladder Networks"></a>(ML) Semi-Supervised Learning with Ladder Networks</h2><p><img src="20180526doc/semi2015.png" alt=""><br>我们知道，拿一个纯正的x去预测一个纯正的y，这是监督任务。<br>我们知道AutoEncoder可以拿一个x去形成representation，再reconstruct一个新x。输入的x甚至可以使Corrupted的。<br>我们还知道AE的loss是新x和输入x的差的一个范数。</p>
+<h2 id="ML-Semi-Supervised-Learning-with-Ladder-Networks"><a href="#ML-Semi-Supervised-Learning-with-Ladder-Networks" class="headerlink" title="(ML) Semi-Supervised Learning with Ladder Networks"></a>(ML) Semi-Supervised Learning with Ladder Networks</h2><p><img src="semi2015.png" alt=""><br>我们知道，拿一个纯正的x去预测一个纯正的y，这是监督任务。<br>我们知道AutoEncoder可以拿一个x去形成representation，再reconstruct一个新x。输入的x甚至可以使Corrupted的。<br>我们还知道AE的loss是新x和输入x的差的一个范数。</p>
 <p>如果把AE的思想和监督任务的思想结合起来，并且扩展AE的任务：<br>不仅要reconstruct输入，而且要reconstruct所有隐含层。并且增加一个原隐含层和打算重构的隐含层之间的短路连接。那这就是一个很复杂的AE。注意有三个$z$，一个是干净的x前馈后得到的$z$，一个是有噪音的x前馈后得到的$\tilde{z}$，一个是由输入不干净的x的重构层的$\hat{z}$。</p>
 <script type="math/tex; mode=display">Reconstruct Loss = || z^{(l)} - \hat{z}^{(l)}||</script><p>如果我们再在中间层加一个岔口，叉出去后加一个激活函数层变成了最终label的输出y，那么就可以把有监督任务和无监督任务放在一起变成半监督任务了。</p>
 <p>这篇论文的改进就是在 Ladder Networks 上，encoder 部分的每一层 layer 都加入了 Gaussian noise，并保持 decoder 部分是 noise-free 的。加了 noise 的部分用于 unsupervised autoencoder loss，noise-free 的就是用来提供 supervised loss。</p>
