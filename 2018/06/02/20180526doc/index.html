@@ -83,12 +83,12 @@
 
 
 
-<meta name="description" content="目录  前言 半监督学习 (GAN, semi-Supervised) Improved Techniques for Training GANs (semi-Supervised, Transfer learning) Domain-Adversarial Training of Neural Networks (ML) Semi-Supervised Learning with Ladder">
+<meta name="description" content="目录  前言 数据集和评测方法 半监督学习 (GAN, semi-Supervised) Improved Techniques for Training GANs (semi-Supervised, Transfer learning) Domain-Adversarial Training of Neural Networks (ML) Semi-Supervised Learning wit">
 <meta property="og:type" content="article">
 <meta property="og:title" content="动作检测（Action Detection）文献综述-持续更新">
 <meta property="og:url" content="http://PengZhenghao.github.io/2018/06/02/20180526doc/index.html">
 <meta property="og:site_name" content="彭正皓的博客">
-<meta property="og:description" content="目录  前言 半监督学习 (GAN, semi-Supervised) Improved Techniques for Training GANs (semi-Supervised, Transfer learning) Domain-Adversarial Training of Neural Networks (ML) Semi-Supervised Learning with Ladder">
+<meta property="og:description" content="目录  前言 数据集和评测方法 半监督学习 (GAN, semi-Supervised) Improved Techniques for Training GANs (semi-Supervised, Transfer learning) Domain-Adversarial Training of Neural Networks (ML) Semi-Supervised Learning wit">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://pengzhenghao.github.io/2018/06/02/20180526doc/recurrent2015.png">
 <meta property="og:image" content="http://pengzhenghao.github.io/2018/06/02/20180526doc/domain2016.png">
@@ -102,10 +102,11 @@
 <meta property="og:image" content="http://pengzhenghao.github.io/2018/06/02/20180526doc/deep2018.png">
 <meta property="og:image" content="http://pengzhenghao.github.io/2018/06/02/20180526doc/convolution2014.png">
 <meta property="og:image" content="http://pengzhenghao.github.io/2018/06/02/20180526doc/recurrent2015.png">
-<meta property="og:updated_time" content="2018-06-04T12:40:29.000Z">
+<meta property="og:image" content="http://pengzhenghao.github.io/2018/06/02/20180526doc/hierarchical2016.png">
+<meta property="og:updated_time" content="2018-06-06T10:50:49.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="动作检测（Action Detection）文献综述-持续更新">
-<meta name="twitter:description" content="目录  前言 半监督学习 (GAN, semi-Supervised) Improved Techniques for Training GANs (semi-Supervised, Transfer learning) Domain-Adversarial Training of Neural Networks (ML) Semi-Supervised Learning with Ladder">
+<meta name="twitter:description" content="目录  前言 数据集和评测方法 半监督学习 (GAN, semi-Supervised) Improved Techniques for Training GANs (semi-Supervised, Transfer learning) Domain-Adversarial Training of Neural Networks (ML) Semi-Supervised Learning wit">
 <meta name="twitter:image" content="http://pengzhenghao.github.io/2018/06/02/20180526doc/recurrent2015.png">
 
 
@@ -386,6 +387,7 @@
         <h1><span id="目录">目录</span></h1><!-- toc -->
 <ul>
 <li><a href="#前言">前言</a></li>
+<li><a href="#数据集和评测方法">数据集和评测方法</a></li>
 <li><a href="#半监督学习">半监督学习</a><ul>
 <li><a href="#gan-semi-supervised-improved-techniques-for-training-gans">(GAN, semi-Supervised) Improved Techniques for Training GANs</a></li>
 <li><a href="#semi-supervised-transfer-learning-domain-adversarial-training-of-neural-networks">(semi-Supervised, Transfer learning) Domain-Adversarial Training of Neural Networks</a></li>
@@ -413,8 +415,10 @@
 <li><a href="#nlp-region-end-to-end-sequence-labeling-via-bi-directional-lstm-cnns-crf">(NLP region) End-to-end Sequence Labeling via Bi-directional LSTM-CNNs-CRF</a></li>
 <li><a href="#rl-videl-summarization-unsupervised-deep-reinforcement-learning-for-unsupervised-video-summarization-with-diversity-representativeness-reward">(RL, Videl summarization, Unsupervised) Deep Reinforcement Learning for Unsupervised Video Summarization with Diversity-Representativeness Reward</a></li>
 <li><a href="#nlp-a-latent-semantic-model-with-convolutional-pooling-structure-for-information-retrieval">(NLP) A Latent Semantic Model with Convolutional-Pooling Structure for Information Retrieval</a></li>
-<li><a href="#nlp-convolutional-neural-networks-for-sentence-classification">(NLP) Convolutional Neural Networks for Sentence Classification</a></li>
-<li><a href="#nlp-recurrent-convolutional-neural-networks-for-text-classificationrecurrent2015png">(NLP) Recurrent Convolutional Neural Networks for Text Classification<br><img src="recurrent2015.png" alt=""></a></li>
+<li><a href="#nlp-cnn-convolutional-neural-networks-for-sentence-classification">(NLP, CNN) Convolutional Neural Networks for Sentence Classification</a></li>
+<li><a href="#a-convolutional-neural-network-for-modelling-sentences">A convolutional neural network for modelling sentences</a></li>
+<li><a href="#nlp-rcnn-recurrent-convolutional-neural-networks-for-text-classificationrecurrent2015png">(NLP, RCNN) Recurrent Convolutional Neural Networks for Text Classification<br><img src="recurrent2015.png" alt=""></a></li>
+<li><a href="#nlp-attention-hierarchical-attention-networks-for-document-classification">(NLP, attention) Hierarchical Attention Networks for Document Classification</a></li>
 </ul>
 </li>
 </ul>
@@ -434,6 +438,7 @@
 <p>Frame Embedding的产生，其实就是一个输入为帧级信息的网络。现在都用Two-stream作为输入。然后在网络结构上有各式各样的设计。</p>
 <p>Video Embedding的产生，是依靠Frame Embedding的融合。有人用的是平均池化。有人用“时间金字塔”来融合。</p>
 <p>分类机制。分两类：一、视频级分类。二、帧级分类。视频级分类的输入是Video Embedding。又或者是输入所有Frame Embedding给RNN。帧级分类则是每帧都进行一次分类。然后取最大子数组什么的。目前没有看到用CRF代替RNN进行帧级分类的文章。相信效果会比RNN好——显然，前一秒是某个动作的话，下一秒不可能突变到另一个动作。</p>
+<h1><span id="数据集和评测方法">数据集和评测方法</span></h1><p>mAP和IoU是什么：<a href="https://blog.csdn.net/katherine_hsr/article/details/79266880" target="_blank" rel="noopener">博客文章</a></p>
 <h1><span id="半监督学习">半监督学习</span></h1><p>半监督学习指的是只有少部分数据有Label。而大部分没有。</p>
 <h2><span id="gan-semi-supervised-improved-techniques-for-training-gans">(GAN, semi-Supervised) Improved Techniques for Training GANs</span></h2><p>将GAN用在半监督领域。创造性的一种设计：让判别器输出K+1个类。其中最后一个类为判定图像为假。那么Loss写成</p>
 <script type="math/tex; mode=display">L = L_{supervised} + L_{unsupervised}</script><script type="math/tex; mode=display">L_{supervised} = -E[\log p_{model}(y|x)]</script><script type="math/tex; mode=display">L_{unsupervised} = -\{E_{p_{data}}[\log [1 -  p_{model} (y=K+1|x) + E_{generated}[\log p_{model} (y=K+1|x)]\}</script><p>前一项是普通的分类误差，第二项是判别误差。<br>猪的注意的是将$D(x) = 1-p_{model} (y=K+1|x)$的话则</p>
@@ -450,9 +455,9 @@
 <script type="math/tex; mode=display">Loss_{LDS} = \cfrac{1}{N}\sum^{N}_{n=1} -\Delta_{KL}(r^{(n)}_{v-adv}, x^{(n)}, \theta)</script><p>由于我们虚拟了一个样本$x+r_{v-adv}$，所以叫VAT。另外上面的LDS，指的就是Local distributional smoothing。可以认为是一种正则化方法，将分布更均匀化了。</p>
 <h1><span id="弱监督学习">弱监督学习</span></h1><p>弱监督学习的label只有动作分类，而没有详细的动作开始和结束的时间。</p>
 <p><strong>！注意：在动作检测领域，有些数据集甚至是这样的：有所有动作的标签，但是只有一部分样本有时间定位。这其实是半监督学习和弱监督学习都有的情况。</strong></p>
-<h2><span id="weakly-supervised-action-localization-by-sparse-temporal-pooling-network">Weakly Supervised Action Localization by Sparse Temporal Pooling Network</span></h2><p><img src="weakly20182.png" alt="网络结构"><br><img src="weakly2018.png" alt="网络结构"><br>这是一个<strong>时间定位</strong>（无位置检测）的、弱监督的、视频的、运动检测的任务。</p>
-<p>帧级网络：“Quovadis,actionrecognition? a new model and the kinetics dataset”提供的</p>
-<p>添加了一个权重单元，从而使得在生成Video Representation的时候，加权地pooling不同帧的Representation。注意这个权重单元是“动作无关”的。</p>
+<h2><span id="weakly-supervised-action-localization-by-sparse-temporal-pooling-network">Weakly Supervised Action Localization by Sparse Temporal Pooling Network</span></h2><p><img src="weakly20182.png" alt="网络结构"><br><img src="weakly2018.png" alt="网络结构"><br>这是一个<strong>时间定位</strong>（无位置检测）的、弱监督的、视频的、视频中有多个动作的、运动检测的任务。</p>
+<p>帧级网络：“Quovadis,actionrecognition? a new model and the kinetics dataset”提供的I3D网络。</p>
+<p>添加了一个权重单元，从而使得在生成Video Representation的时候，加权地pooling不同帧的Representation。注意这个权重单元是“动作无关”的。然后把video representation扔给一个简单的MLP得到输出。</p>
 <p>由“ Learning deep features for discriminative localization”启发设计了Temporal Class Activation Mapping(T-CAM)。其实是利用了分类器的激活值，来知道<br>“这一刻，此动作有没有在发生”。</p>
 <p>时段proposal机制：利用T-CAM，经过threshold，得到的许多许多段视频。就完了。我个人觉得如果用了CUHK的那个水淹算法可能会更好。</p>
 <h2><span id="object-detection-is-object-localization-for-free-weakly-supervised-learning-with-convolutional-neural-network">(Object detection) Is object localization for free? Weakly-supervised learning with convolutional neural network</span></h2><p><img src="is2016.png" alt=""><br>网络结构是在Alexnet的基础上，将第六、七层的全连接层改为卷积层，再加上两层自适应卷积层，最后一个自适应卷积层后面添加max-pooling层，输出响应最大的点。因为整个网络只有卷积层，所以对输入图像的大小没有限制，前五个卷积层是在Imagenet上进行训练的，后面的几层是在Pascal数据集上进行训练的，所以虽然层数很多，但总体的训练时间没有很长。 </p>
@@ -490,7 +495,7 @@
 <li>监督的。</li>
 </ul>
 <h2><span id="rpanan-end-to-end-recurrent-pose-attention-network-for-action-recognition">RPAN：An end-to-end recurrent pose-attention network for action recognition</span></h2><p>乔老师的文章。视频级的分类。</p>
-<p>利用了Joint location标注，去训练了一个中间的attention层，从而与“直接将一个视频扔给CNN+LSTM做分类”比更高的准确度。但是需要Joint location标注。而且没有给出temporal proposal。</p>
+<p>利用了Joint location标注，去训练了一个中间的attention层（其实可不可以不用这个标注来训练呢？），从而与“直接将一个视频扔给CNN+LSTM做分类”比更高的准确度。但是需要Joint location标注。而且没有给出temporal proposal。</p>
 <h2><span id="online-red-reinforced-encoder-decoder-networks-for-action-anticipation">(Online) RED: Reinforced Encoder-Decoder Networks for Action Anticipation</span></h2><p>2017年7月的文章。用到了强化学习。</p>
 <p>过去的方法要不是利用LSTM读取旧视频的信息给出分类，要不就是用前一帧去生成下一帧的视频的Frame embedding，然后在给这个Embedding分类。</p>
 <ul>
@@ -517,10 +522,14 @@
 <p>在执行阶段，一个视频进来，策略网络会给出每帧做出动作的概率。这个概率可以被理解为importance score。既然我们的任务是做视频摘要，那么用一个简单的knapsack算法取出在给定时间内importance最高的片段就好了。</p>
 <p>疑问：为什么可以从论文中读取别人的结果？自己不复现？</p>
 <h2><span id="nlp-a-latent-semantic-model-with-convolutional-pooling-structure-for-information-retrieval">(NLP) A Latent Semantic Model with Convolutional-Pooling Structure for Information Retrieval</span></h2><p>非常糟糕，非常过时，浪费时间。毫无价值的文章。可能当时启发了很多人吧，现在看来一无是处。</p>
-<h2><span id="nlp-convolutional-neural-networks-for-sentence-classification">(NLP) Convolutional Neural Networks for Sentence Classification</span></h2><p><img src="convolution2014.png" alt=""><br>应该是将CNN用于从word embedding产生sentance embedding的开山之作。非常优美，简洁的文章。一图就能看明白，不赘述。</p>
-<h2><span id="nlp-recurrent-convolutional-neural-networks-for-text-classification">(NLP) Recurrent Convolutional Neural Networks for Text Classification</span></h2><p><img src="recurrent2015.png" alt=""><br>比上一篇文章的方法进步了一点。拿去CNN做扫描的不再是简单的词向量了。而是这样的：</p>
+<h2><span id="nlp-cnn-convolutional-neural-networks-for-sentence-classification">(NLP, CNN) Convolutional Neural Networks for Sentence Classification</span></h2><p><img src="convolution2014.png" alt=""><br>应该是将CNN用于从word embedding产生sentance embedding的开山之作。非常优美，简洁的文章。一图就能看明白。神奇的是作者只有一个人。</p>
+<p>作者把每个word对应的向量，一行一行地叠起来，形成一个$\mathcal{R}^{len\times dim}$的矩阵。其中$len$为输入的单词的个数，$dim$为词向量的维度。然后使用许多个长条形的CNN对这个矩阵提取特征。值得注意的是，长条形的CNN的窗口大小为：$k \times dim$，其中$k$与“word-n-grams”中的$n$有异曲同工之处，表示的是联合考虑附近多少个词组。每一个CNN有一个K。作者选取了$k=1,2,3$共三个CNN。</p>
+<p>CNN输出的值是一个$(len/k) \times 1$的向量。每个CNN有$c$通道。在一个通道上，作者对这个$(len/k) \times 1$的向量取最大值（Max Pooling），于是对于一个CNN就得到了一个长度为$c$的向量。对不同的CNN的输出向量Concat一下，就成为了最终的Sentence representation。</p>
+<h2><span id="a-convolutional-neural-network-for-modelling-sentences">A convolutional neural network for modelling sentences</span></h2><p>与上图基本差不多。没有细看。主要是提出了<strong>动态K-Max pooling</strong>的方法，使得每一行word卷积之后再pooling之后（此时是c个d<em>1的向量，c是通道数，d是神经元数）不再是只有一个max的输出了。可以输出前K个最大的值。而且最终呈现在结果（最终一个各个通道的K个值拼起来的一个大向量，(c</em>k)*1维度）中的这K个值依然会按照原来的顺序排列。不过按照了原来的顺序的话，每个位置上的“特征”的玄学含义就不一定相等了。</p>
+<h2><span id="nlp-rcnn-recurrent-convolutional-neural-networks-for-text-classification">(NLP, RCNN) Recurrent Convolutional Neural Networks for Text Classification</span></h2><p><img src="recurrent2015.png" alt=""><br>比上一篇文章的方法进步了一点。拿去CNN做扫描的不再是简单的词向量了。而是这样的：</p>
 <p><code>concat(本单词前的前向RNN的隐变量，本单词的embedding，本单词后的后项RNN的隐变量)</code></p>
 <p>于是乎就考虑了上下文信息。另外说多一句，这是中科院2015年的哦。</p>
+<h2><span id="nlp-attention-hierarchical-attention-networks-for-document-classification">(NLP, attention) Hierarchical Attention Networks for Document Classification</span></h2><p><img src="hierarchical2016.png" alt=""><br>使用了两层attention。一层对word做，从而得到句子表示。一层对句子做，从而得到文章表示。</p>
 
       
     </div>
@@ -672,7 +681,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -746,7 +755,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">半监督学习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">(GAN, semi-Supervised) Improved Techniques for Training GANs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">(semi-Supervised, Transfer learning) Domain-Adversarial Training of Neural Networks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">(ML) Semi-Supervised Learning with Ladder Networks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">(ML) Distributional Smoothing with Virtual Adversarial Training</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">弱监督学习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">Weakly Supervised Action Localization by Sparse Temporal Pooling Network</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">(Object detection) Is object localization for free? Weakly-supervised learning with convolutional neural network</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">(Object detection) Weakly Supervised Deep Detection Networks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">(Semantic segmentation, weakly supervised) Weakly Supervised Semantic Segmentation using Web-Crawled Videos</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">(Semantic segmantation, weakly supervised) Object Region Mining with Adversarial Erasing: A Simple Classification to Semantic Segmentation Approach</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">监督学习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">Quo vadis, action recognition? a new model and the kinetics dataset</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">Multi-region Two-Stream R-CNN for Action Detection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">Temporal Action Detection with Structured Segment Networks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">RPAN：An end-to-end recurrent pose-attention network for action recognition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">(Online) RED: Reinforced Encoder-Decoder Networks for Action Anticipation</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">跨领域参考</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">(NLP region) End-to-end Sequence Labeling via Bi-directional LSTM-CNNs-CRF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">(RL, Videl summarization, Unsupervised) Deep Reinforcement Learning for Unsupervised Video Summarization with Diversity-Representativeness Reward</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">(NLP) A Latent Semantic Model with Convolutional-Pooling Structure for Information Retrieval</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">(NLP) Convolutional Neural Networks for Sentence Classification</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">(NLP) Recurrent Convolutional Neural Networks for Text Classification</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">数据集和评测方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">半监督学习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">(GAN, semi-Supervised) Improved Techniques for Training GANs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">(semi-Supervised, Transfer learning) Domain-Adversarial Training of Neural Networks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">(ML) Semi-Supervised Learning with Ladder Networks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">(ML) Distributional Smoothing with Virtual Adversarial Training</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">弱监督学习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">Weakly Supervised Action Localization by Sparse Temporal Pooling Network</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">(Object detection) Is object localization for free? Weakly-supervised learning with convolutional neural network</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">(Object detection) Weakly Supervised Deep Detection Networks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">(Semantic segmentation, weakly supervised) Weakly Supervised Semantic Segmentation using Web-Crawled Videos</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">(Semantic segmantation, weakly supervised) Object Region Mining with Adversarial Erasing: A Simple Classification to Semantic Segmentation Approach</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">监督学习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">Quo vadis, action recognition? a new model and the kinetics dataset</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">Multi-region Two-Stream R-CNN for Action Detection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">Temporal Action Detection with Structured Segment Networks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">RPAN：An end-to-end recurrent pose-attention network for action recognition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">(Online) RED: Reinforced Encoder-Decoder Networks for Action Anticipation</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">跨领域参考</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">(NLP region) End-to-end Sequence Labeling via Bi-directional LSTM-CNNs-CRF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">(RL, Videl summarization, Unsupervised) Deep Reinforcement Learning for Unsupervised Video Summarization with Diversity-Representativeness Reward</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">(NLP) A Latent Semantic Model with Convolutional-Pooling Structure for Information Retrieval</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">(NLP, CNN) Convolutional Neural Networks for Sentence Classification</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">A convolutional neural network for modelling sentences</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">(NLP, RCNN) Recurrent Convolutional Neural Networks for Text Classification</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">(NLP, attention) Hierarchical Attention Networks for Document Classification</span></a></li></ol></li></ol></div>
             
 
           </div>
