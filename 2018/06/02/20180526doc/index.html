@@ -103,7 +103,7 @@
 <meta property="og:image" content="http://pengzhenghao.github.io/2018/06/02/20180526doc/convolution2014.png">
 <meta property="og:image" content="http://pengzhenghao.github.io/2018/06/02/20180526doc/recurrent2015.png">
 <meta property="og:image" content="http://pengzhenghao.github.io/2018/06/02/20180526doc/hierarchical2016.png">
-<meta property="og:updated_time" content="2018-06-06T10:50:49.000Z">
+<meta property="og:updated_time" content="2018-06-11T08:02:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="动作检测（Action Detection）文献综述-持续更新">
 <meta name="twitter:description" content="目录  前言 数据集和评测方法 半监督学习 (GAN, semi-Supervised) Improved Techniques for Training GANs (semi-Supervised, Transfer learning) Domain-Adversarial Training of Neural Networks (ML) Semi-Supervised Learning wit">
@@ -457,7 +457,7 @@
 <p><strong>！注意：在动作检测领域，有些数据集甚至是这样的：有所有动作的标签，但是只有一部分样本有时间定位。这其实是半监督学习和弱监督学习都有的情况。</strong></p>
 <h2><span id="weakly-supervised-action-localization-by-sparse-temporal-pooling-network">Weakly Supervised Action Localization by Sparse Temporal Pooling Network</span></h2><p><img src="weakly20182.png" alt="网络结构"><br><img src="weakly2018.png" alt="网络结构"><br>这是一个<strong>时间定位</strong>（无位置检测）的、弱监督的、视频的、视频中有多个动作的、运动检测的任务。</p>
 <p>帧级网络：“Quovadis,actionrecognition? a new model and the kinetics dataset”提供的I3D网络。</p>
-<p>添加了一个权重单元，从而使得在生成Video Representation的时候，加权地pooling不同帧的Representation。注意这个权重单元是“动作无关”的。然后把video representation扔给一个简单的MLP得到输出。</p>
+<p>添加了一个权重单元，从而使得在生成Video Representation的时候，加权地pooling不同帧的Representation。注意这个权重单元是“动作无关”的。然后把video representation扔给一个简单的MLP得到输出。 1</p>
 <p>由“ Learning deep features for discriminative localization”启发设计了Temporal Class Activation Mapping(T-CAM)。其实是利用了分类器的激活值，来知道<br>“这一刻，此动作有没有在发生”。</p>
 <p>时段proposal机制：利用T-CAM，经过threshold，得到的许多许多段视频。就完了。我个人觉得如果用了CUHK的那个水淹算法可能会更好。</p>
 <h2><span id="object-detection-is-object-localization-for-free-weakly-supervised-learning-with-convolutional-neural-network">(Object detection) Is object localization for free? Weakly-supervised learning with convolutional neural network</span></h2><p><img src="is2016.png" alt=""><br>网络结构是在Alexnet的基础上，将第六、七层的全连接层改为卷积层，再加上两层自适应卷积层，最后一个自适应卷积层后面添加max-pooling层，输出响应最大的点。因为整个网络只有卷积层，所以对输入图像的大小没有限制，前五个卷积层是在Imagenet上进行训练的，后面的几层是在Pascal数据集上进行训练的，所以虽然层数很多，但总体的训练时间没有很长。 </p>
